@@ -1,0 +1,31 @@
+.respuesta {
+    background-color: #eef2f6; /* Color más frío que el fondo de .mensaje */
+    border-left: 4px solid #4e91f9; /* Línea azul que indica que es una respuesta */
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-left: 40px; /* Un poco indentado respecto al mensaje principal */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05); 
+    transition: background-color 0.3s ease;
+  }
+  
+  .respuesta:hover {
+    background-color: #e3e9f1;
+  }
+  
+  .respuesta .nicknameUsuario {
+    font-size: 15px;
+    color: #2a4c79;
+  }
+  
+  .respuesta .contenidoMensaje {
+    color: #333;
+    font-size: 15px;
+  }
+
+  
+  .respuesta .reacciones {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  

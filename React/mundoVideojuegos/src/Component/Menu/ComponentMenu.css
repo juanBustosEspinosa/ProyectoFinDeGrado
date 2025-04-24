@@ -1,0 +1,160 @@
+/* General styling for navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: #1e1e1e;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Left section of navbar (logo) */
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Center section of navbar (links) */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 2;
+}
+
+/* Styling for nav links */
+.nav-links li a,
+.submenu > a {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for links */
+.nav-links li a:hover,
+.submenu > a:hover {
+    background-color: #444;
+}
+
+/* Dropdown submenu styling */
+.submenu {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    list-style: none;
+    padding: 10px;
+    top: 100%;
+    left: 0;
+    min-width: 150px; /* Control width of dropdown */
+    z-index: 10;
+    border-radius: 5px; /* Añadimos bordes redondeados para mejorar el diseño */
+}
+
+.submenu:hover .dropdown {
+    display: block;
+}
+
+/* Estilo para los elementos del submenú (los enlaces dentro del dropdown) */
+.dropdown li {
+    margin-bottom: 10px; /* Añadir espacio entre los elementos del submenú */
+}
+
+/* Para evitar que el último elemento tenga margen adicional */
+.dropdown li:last-child {
+    margin-bottom: 0;
+}
+
+/* Asegúrate de que los enlaces dentro del submenú estén estilizados correctamente */
+.dropdown li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    display: block; /* Hace que el enlace ocupe todo el ancho del item */
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for dropdown items */
+.dropdown li a:hover {
+    background-color: #444;
+}
+
+/* Right section of navbar (user profile or login) */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Styling for user profile area */
+.usuario {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 5px; /* Añade espacio entre la imagen y el nickname */
+  }
+  
+  .perfil-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 30%;
+    object-fit: cover;
+  }
+  
+  .usuario span {
+    font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
+    color: white; /* Si quieres que el texto sea blanco */
+  }
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar-left {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar-right {
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Style for the dropdown */
+    .dropdown {
+        min-width: 100%; /* Make dropdown fill the width of the navbar */
+    }
+}

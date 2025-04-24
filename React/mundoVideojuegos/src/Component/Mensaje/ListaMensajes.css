@@ -1,0 +1,119 @@
+.listaMensaje {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+  
+  .mensaje {
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 16px;
+    transition: transform 0.2s ease;
+  }
+  
+  .mensaje:hover {
+    transform: scale(1.01);
+  }
+  
+  .nicknameUsuario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .infoUsuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .perfilUsuario {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+  }
+  
+  .tituloJuego {
+    color: #555;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  
+  .contenidoMensaje {
+    margin: 0;
+    color: #444;
+  }
+  .puntuacion {
+    font-size: 18px;
+    display: flex;
+    gap: 2px;
+  }
+  
+  .estrella {
+    font-size: 20px;
+    color: #ccc; /* Por defecto vacía */
+  }
+  
+  .estrella.llena {
+    color: #FFD700; /* Dorado para llenas */
+  }
+  
+  .estrella.media {
+    background: linear-gradient(90deg, #FFD700 50%, #ccc 50%);
+    background-clip: text;            /* Estándar */
+    -webkit-background-clip: text;    /* Para navegadores WebKit */
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* Safari/WebKit */
+  }
+
+
+  .btn-like, .btn-dislike {
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #555;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .btn-like:hover {
+    color: green;
+    transform: scale(1.05);
+  }
+  
+  .btn-dislike:hover {
+    color: red;
+    transform: scale(1.05);
+  }
+  .btn-like.activo {
+    color: green;
+  }
+  
+  .btn-dislike.activo {
+    color: red;
+  }
+  
+
+  .btn-ver-respuestas {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .btn-ver-respuestas:hover {
+    background-color: #0056b3;
+  }
