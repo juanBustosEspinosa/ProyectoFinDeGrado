@@ -27,6 +27,12 @@ public class ControladorJuego {
         return ResponseEntity.ok(servicioJuego.getById(id));
     }
 
+
+    @GetMapping("/BuscarJuegos")
+    public ResponseEntity<List<Juego>> buscarJuegos(@RequestParam String nombre){
+        return ResponseEntity.ok(servicioJuego.like(nombre));
+    }
+
     @PostMapping
     public ResponseEntity<String> add(@Valid @RequestBody Juego juego){
         return ResponseEntity.ok(servicioJuego.save(juego));

@@ -3,11 +3,15 @@ import foto from "../../Fotos/foto.png";
 import "./ListaMensajes.css";
 import ListaRespuesta from './ListaRespuesta';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 function ListaMensajes({ mensajes }) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const [reacciones, setReacciones] = useState({});
   const [respuestasVisibles, setRespuestasVisibles] = useState({});
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const obtenerReaccionesUsuario = async () => {
@@ -112,6 +116,12 @@ function ListaMensajes({ mensajes }) {
     }
   };
 
+
+  const HandleRespuesta = (mensaje) => {
+    navigate("/Responder", { state: { mensaje } });
+  };
+
+
   return (
     <div>
       <h2>Mensajes:</h2>
@@ -164,6 +174,8 @@ function ListaMensajes({ mensajes }) {
               <button className='btn-ver-respuestas' onClick={() => toggleRespuestas(mensaje.id)}>
                 {respuestasVisibles[mensaje.id] ? 'Ocultar respuestas' : 'Ver respuestas'}
               </button>
+              <button className='' onClick={() => HandleRespuesta(mensaje)}>Responder</button>
+              
               {/** SI la respuestasVisbles del id es true se mostrara listaRespuesta pero si es falso no se muestra nada ya que se tiene que cumplir la primera opcion */}
               {respuestasVisibles[mensaje.id] && (
                 <ListaRespuesta mensajeId={mensaje.id} />

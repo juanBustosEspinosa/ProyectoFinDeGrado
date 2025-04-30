@@ -1,5 +1,6 @@
 package org.example.poryectofinal.MundoVideojuegos.Servicio;
 
+import org.example.poryectofinal.MundoVideojuegos.Excepciones.NoHayJuegosException;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Juego;
 import org.example.poryectofinal.MundoVideojuegos.Repositorio.RepositorioJuego;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,15 @@ public class ServicioJuego {
             return "Se ha añadido la foto";
         }
         return "El juego no existe";
+    }
+
+    @Transactional
+    public List<Juego> like(String nombre){
+        List<Juego> listaJuegos = repositorioJuego.buscarPorNombre(nombre);
+        if (listaJuegos.isEmpty()){
+            throw new NoHayJuegosException("No se ha encontrado nada con " + nombre);
+        }
+        return listaJuegos;
     }
     @Transactional
     public String delete(Integer id){

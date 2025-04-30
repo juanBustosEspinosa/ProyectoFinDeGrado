@@ -1,0 +1,21 @@
+.contenedor-boton {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .boton-publicar {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .boton-publicar:hover {
+    background-color: #45a049;
+  }

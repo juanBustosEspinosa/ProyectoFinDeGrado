@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -52,9 +53,20 @@ public class Mensaje {
     @Column(name = "descripcion", nullable = false, length = 500)
     private String descripcion;
 
-    @NotNull
+
     @Column(name = "fecha", nullable = false)
-    private Instant fecha;
+    private LocalDateTime fecha;
+
+    // Este método se ejecutará antes de persistir la entidad
+    @PrePersist
+    public void prePersist() {
+        if (this.fecha == null) {
+            this.fecha = LocalDateTime.now();  // Asigna la fecha y hora actuales
+        }
+        if (descripcion == null || descripcion.trim().isEmpty()) {
+            descripcion = "No hay mensajes";
+        }
+    }
 
     @Column(name = "imagen")
     private byte[] imagen;
@@ -129,11 +141,11 @@ public class Mensaje {
         this.descripcion = descripcion;
     }
 
-    public Instant getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Instant fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

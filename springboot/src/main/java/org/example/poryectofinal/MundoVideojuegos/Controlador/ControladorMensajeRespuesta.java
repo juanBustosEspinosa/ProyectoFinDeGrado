@@ -33,7 +33,7 @@ public class ControladorMensajeRespuesta {
     }
 
     @PostMapping
-    public ResponseEntity<String> add(@Valid @RequestBody MensajeRespuesta mensajeRespuesta){
+    public ResponseEntity<String> add(@RequestBody MensajeRespuesta mensajeRespuesta){
         return ResponseEntity.ok(servicioMensajeRespuesta.save(mensajeRespuesta));
     }
 
