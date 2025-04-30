@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -55,8 +56,13 @@ public class MensajeRespuesta {
 
     @NotNull
     @Column(name = "fecha", nullable = false)
-    private Instant fecha;
-
+    private LocalDateTime fecha;
+    @PrePersist
+    public void prePersist() {
+        if (this.fecha == null) {
+            this.fecha = LocalDateTime.now();  // Asigna la fecha y hora actuales
+        }
+    }
     @Column(name = "imagen")
     private byte[] imagen;
 
@@ -127,11 +133,11 @@ public class MensajeRespuesta {
         this.dislikes = dislikes;
     }
 
-    public Instant getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Instant fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 

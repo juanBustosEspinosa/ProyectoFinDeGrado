@@ -28,11 +28,11 @@ public class ServicioMensajeRespuesta {
     }
     @Transactional
     public String save(MensajeRespuesta mensajeRespuesta){
-        if (repositorioMensajeRespuesta.existsById(mensajeRespuesta.getId())){
-            return "El nombre del usuario ya existe";
-        }else {
+        if (mensajeRespuesta.getId() != null && repositorioMensajeRespuesta.existsById(mensajeRespuesta.getId())) {
+            return "Ya existe la respuesta";
+        } else {
             repositorioMensajeRespuesta.save(mensajeRespuesta);
-            return "Se ha creado el usuario";
+            return "Se ha creado la respuesta";
         }
 
     }
