@@ -2,7 +2,7 @@
 
 /*CONTENIDO DE JUEGOS*/
 .contenedor-juegos {
-    padding-top: 70px; /* espacio para que no tape el menú */
+    padding-top: 120px; /* espacio para que no tape el menú */
   }
   
   .menu-fijo {
@@ -16,6 +16,8 @@
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10; /* asegura que esté arriba */
+    grid-row: 1;
+
   }
   
   .contenido-juego {
@@ -24,32 +26,47 @@
 
 
  /* CONTENIDO PRINCIPAL*/
-  .contenido-principal {
-    padding-bottom: 80px;  /* Añadimos espacio para el botón de "Publicar" */
-    margin-bottom: 80px;   /* Asegura que el contenido no quede debajo del botón */
-    padding-top: 60px; /* Espacio para el menú fijo */
-  }
-  
-  /* Estilo del botón "Publicar" fijo en la parte inferior */
-  .publicar-fijo {
-    position: fixed;
-    bottom: 20px;        /* Coloca el botón a 20px desde la parte inferior */
-    left: 50%;           /* Centra el botón horizontalmente */
-    transform: translateX(-50%);  /* Asegura que esté perfectamente centrado */
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 100;        /* Asegura que el botón esté sobre otros elementos */
-    transition: background-color 0.3s;
-    width: auto;         /* El botón se ajustará a su contenido */
-    box-sizing: border-box;
-  }
-  
-  /* Efecto al pasar el ratón por encima */
-  .publicar-fijo:hover {
-    background-color: #0056b3;
-  }
+.pagina-contenedor {
+  min-height: 100vh; /* corregido */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.contenido-principal {
+  padding-top: 80px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
+.contenido-principal-publicar {
+  padding-top: 200px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
+
+.contenido-principal-busqueda {
+  padding-top: 150px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
+.contenido-principal-perfil {
+  padding-top: 150px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
+
+.contenido-principal-detalleJuego {
+  padding-top: 170px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
+
+
+
+.footer {
+  grid-row: 3;
+}
