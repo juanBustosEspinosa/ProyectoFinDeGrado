@@ -1,6 +1,7 @@
 package org.example.poryectofinal.MundoVideojuegos.Servicio;
 
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Juego;
+import org.example.poryectofinal.MundoVideojuegos.Modulo.Mensaje;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.MensajeRespuesta;
 import org.example.poryectofinal.MundoVideojuegos.Repositorio.RepositorioMensajeRespuesta;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,16 @@ public class ServicioMensajeRespuesta {
     public String delete(Integer id){
         repositorioMensajeRespuesta.deleteById(id);
         return "Se ha eliminado el usuario";
+    }
+
+    public String deleteByIdMensaje(Integer idMensaje){
+        List<MensajeRespuesta> respuestas = repositorioMensajeRespuesta.findByIdMensaje_Id(idMensaje);
+
+        if (!respuestas.isEmpty()) {
+            repositorioMensajeRespuesta.deleteAll(respuestas);
+            return "Se han eliminado las respuestas del mensaje con ID: " + idMensaje;
+        } else {
+            return "No se encontró ninguna respuesta asociada al mensaje con ID: " + idMensaje;
+        }
     }
 }

@@ -1,10 +1,14 @@
 .contenedor-boton {
     display: flex;
     justify-content: center;
+    position: fixed;
     margin-top: 50px;
+    top: 85%;
+    right: 50%;
   }
   
   .boton-publicar {
+  
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;

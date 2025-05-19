@@ -58,6 +58,11 @@ public class ServicioUsuario {
         return "El usuario no existe";
 
     }
+
+    @Transactional
+    public List<Usuario> buscarPorNickname(String nickname){
+        return repositorioUsuario.buscarPorNickname(nickname);
+    }
     @Transactional
     public String delete(Integer id){
         repositorioUsuario.deleteById(id);

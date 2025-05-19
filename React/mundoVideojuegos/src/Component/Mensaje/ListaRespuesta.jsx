@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import foto from "../../Fotos/foto.png";
+import foto from "../../Fotos/foto.webp";
 import "./ListaRespuesta.css";
+import { useNavigate } from 'react-router-dom';
 
 
-function ListaRespuesta({ mensajeId }) {
+
+function ListaRespuesta({ mensajeId,suscripciones,handleSuscripcion }) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const [respuestas, setRespuestas] = useState([]);
   const [reacciones, setReacciones] = useState({});
+  const navigate = useNavigate();
+
 
   // Obtener respuestas del mensaje
   useEffect(() => {
@@ -85,6 +89,36 @@ console.log(respuesta);
     }
   };
 
+
+
+
+const irAlPerfil = (usuario) => {
+  navigate('/perfil', { state: { usuario } });
+};
+
+ 
+
+const handleEliminarPublicacion = async (id) => {
+  try {
+
+    
+    await axios.delete('http://localhost:8091/MensajeRespuesta',{
+      params: {id:  id}
+    });
+    await axios.delete('http://localhost:8091/LikesDislikes/eliminarRespuestaALL',{
+      params: {idMensajeRespuesta:  id}}
+    )
+    //Aqui actualizo las Respuestas para que se eliminen
+    setRespuestas(prev => prev.filter(m => m.id !== id));
+
+  } catch(error){
+    console.error("Error al Eliminar:", error);
+  }
+}
+
+
+
+
   const handleDislikeRespuesta = async (respuesta) => {
     const respuestaId = respuesta.id.toString();
     const reaccionActual = reacciones[respuestaId];
@@ -126,12 +160,27 @@ console.log(respuesta);
         return (
           <div key={index} className='respuesta'>
             <div className='nicknameUsuario'>
-              <div className="infoUsuario">
-                <img className='perfilUsuario' src={foto} alt='perfil' />
-                {respuesta.idUsuario.nickname}
+              <div className="infoUsuario">                
+                <img className='perfilUsuario' src={respuesta.idUsuario.imagen ? `data:image/jpeg;base64,${respuesta.idUsuario.imagen}` : foto} alt='perfil' />
+                  <a onClick={() => irAlPerfil(respuesta.idUsuario)}>
+                    {respuesta.idUsuario.nickname}
+                  </a>                {respuesta.idUsuario.id !== usuario.id && (
+                  <button onClick={() => handleSuscripcion(respuesta.idUsuario.id)}>
+                  {suscripciones.includes(respuesta.idUsuario.id) ? 'Siguiendo' : 'Seguir'}
+                  </button>
+                )}
+              </div>
+              <div>
+                { respuesta.idUsuario.id == usuario.id && (
+                  <button onClick={() => handleEliminarPublicacion(respuesta.id)}> Eliminar Mensaje</button>
+                )}
+                <strong className='tituloJuego'>Reseña de {respuesta.idJuego.nombre}</strong>
               </div>
             </div>
             <p className='contenidoMensaje'>{respuesta.descripcion}</p>
+            {respuesta.imagen != null &&(
+            <img src={`data:image/jpeg;base64,${respuesta.imagen}`} alt="" />
+            )}
             <p className='puntuacion'>
               {[...Array(5)].map((_, i) => {
                 const valor = respuesta.puntuacion;
@@ -165,5 +214,6 @@ console.log(respuesta);
     </div>
   );
 }
+
 
 export default ListaRespuesta;

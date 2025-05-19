@@ -11,7 +11,13 @@ import ButtonPublicar from './Component/Mensaje/PublicarMensaje/ButtonPublicar';
 import ComponentPublicar from './Component/Mensaje/PublicarMensaje/ComponentPublicar';
 import BusquedaSeleccionCompoenet from './Component/Juegos/JuegosBusqueda/BusquedaSeleccionCompoenet'
 import ComponentResponder from './Component/Mensaje/ResponderMensaje/CompoenetResponder';
-
+import CompoenetBusqueda from './Component/Juegos/JuegosBusqueda/ComponentBusqueda';
+import ComponentLectura from './Component/Juegos/JuegosBusqueda/ComponentLectura';
+import ComponetBusquedaUsuario from './Component/Mensaje/BuscarUsuario/ComponetBusquedaUsuario'
+import ComponentMostrarUsuario from './Component/Mensaje/BuscarUsuario/ComponentMostrarUsuario';
+import ComponentJuegoDetallado from './Component/Juegos/DetallesJuego/ComponentJuegoDetallado';
+import ComponentPerfil from './Component/Mensaje/Perfil/ComponentPerfil';
+import ComponentCrearJuego from './Component/Juegos/CrearJuego/CompoenetCrearJuego';
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext); // Obtener el estado de autenticación desde el contexto
@@ -40,8 +46,9 @@ function App() {
 
             {/* Contenedor para los mensajes o el contenido dinámico */}
             <div className="contenido-principal">
-              <ComponentMensaje />
+              <ComponentMensaje idjuego={null} idUsuario={null} />
             </div>
+            <ComponetBusquedaUsuario />
 
             {/* Botón de "Publicar" fijo en la parte inferior */}
             <ButtonPublicar className="publicar-fijo" />
@@ -50,7 +57,7 @@ function App() {
         {/** Te envia al registro para que el usuario se cree su cuenta */}
         <Route
           path='/registro'
-          element=  {<ComponentRegistro></ComponentRegistro>}
+          element=  {<ComponentRegistro/>}
         />
         {/**Compoenete que te lleva al apartado general de los juegos */}
         <Route
@@ -61,7 +68,8 @@ function App() {
               <ComponentMenu />
             </div>
             <div className="contenido-juego">
-              <ComponentJuego />
+              <ComponentJuego idUsuario={null} />
+              <ComponentLectura/>
             </div>
           </div>: <Navigate to="/login"/> }
         />
@@ -69,12 +77,12 @@ function App() {
         {/** Boton que te permite publicar un mensaje sobre un juego */}
         <Route
         path='/publicacion'
-        element={isAuthenticated ? <div><ComponentMenu></ComponentMenu>  <ComponentPublicar></ComponentPublicar> </div> : <Navigate to="/login"/>}
+        element={isAuthenticated ? <div><ComponentMenu/> <ComponentPublicar/> </div> : <Navigate to="/login"/>}
         />
 
         <Route
         path='/Responder'
-        element={isAuthenticated ? <div><ComponentMenu></ComponentMenu>  <ComponentResponder/> </div> : <Navigate to="/login"/>}
+        element={isAuthenticated ? <div><ComponentMenu/>  <ComponentResponder/> </div> : <Navigate to="/login"/>}
         />  
 
 
@@ -82,6 +90,32 @@ function App() {
         path="/EleccionJuego"
         element={isAuthenticated ? <div><BusquedaSeleccionCompoenet /> </div>: <Navigate to="/login"/>}
         />
+        <Route
+        path="/Perfil"
+        element={isAuthenticated ? <div><ComponentMenu/> <ComponentPerfil /> </div>: <Navigate to="/login"/>}
+        />
+        
+        
+        {/**Esta ruta te lleva a detalles del juego */}
+        <Route
+        path="/DetalleJuego"
+        element={isAuthenticated ? <div>  <ComponentMenu/>   <ComponentJuegoDetallado /> </div>: <Navigate to="/login"/>}
+        />
+          <Route
+        path="/CrearJuego"
+        element={isAuthenticated ? <div>  <ComponentMenu/>   <ComponentCrearJuego /> </div>: <Navigate to="/login"/>}
+        />
+
+        <Route
+        path="/BusquedaJuego"
+        element={isAuthenticated ? <div> <ComponentMenu/> <CompoenetBusqueda/> </div>: <Navigate to="/login"/>}
+        />
+
+        <Route
+        path="/BusquedaUsuario"
+        element={isAuthenticated ? <div> <ComponentMenu/> <ComponentMostrarUsuario/> </div>: <Navigate to="/login"/>}
+        />
+
 
 
       </Routes>

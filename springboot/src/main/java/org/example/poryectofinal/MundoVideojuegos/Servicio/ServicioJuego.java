@@ -65,6 +65,16 @@ public class ServicioJuego {
         }
         return listaJuegos;
     }
+
+    public List<Juego> getJuegoByUsuario(Integer id){
+        List<Juego> listaJuegos = repositorioJuego.findByIdDesarrollador_Id(id);
+        if (listaJuegos.isEmpty()){
+            throw new NoHayJuegosException("No hay juegos publicados");
+        }
+        return listaJuegos;
+    }
+
+
     @Transactional
     public String delete(Integer id){
         repositorioJuego.deleteById(id);

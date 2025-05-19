@@ -13,7 +13,12 @@ function ComponentRegistro(){
   const [correo, setCorreo] = useState('');
   const [apellido, setApellido] = useState('');
   const [nombre, setNombre] = useState('');
+  const [imagen, setImagen] = useState(null);  // Cambié a null, ya que estamos manejando un archivo
   const navigate = useNavigate();
+
+
+  const MAX_SIZE_MB = 25;  // 25 MB es lo maximo que vamos a permitir en la base de datos 
+  const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;  // Convertir a bytes
 
   const usuarioData = {
     nickname: username,
@@ -22,9 +27,25 @@ function ComponentRegistro(){
     tipo: tipo,
     correo: correo,
     apellido: apellido,
-    nombre: nombre
+    nombre: nombre,
+    imagen: imagen
   };
   const [error, setError] = useState('');
+
+
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+
+  reader.onloadend = () => {
+    const base64String = reader.result.split(',')[1]; // solo base64
+    setImagen(base64String); // esto es lo que espera el backend
+  };
+
+  if (file) {
+    reader.readAsDataURL(file); // importante usar .readAsDataURL
+  }
+};
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -143,7 +164,12 @@ function ComponentRegistro(){
                 placeholder="Ingresa tu Apellido"
                 />
             </div>
-
+            <input
+              type="file"
+              accept="image/*"
+              className="input-imagen"
+              onChange={handleFileChange}
+            />
 
             <button type="submit">Registro</button>
           </form>

@@ -45,8 +45,13 @@ public class ControladorMensajeRespuesta {
     public ResponseEntity<String> updateImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file) throws IOException {
         return ResponseEntity.ok(servicioMensajeRespuesta.updateImagen(id,file));
     }
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> delete(@PathVariable int id){
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestParam Integer id){
         return ResponseEntity.ok(servicioMensajeRespuesta.delete(id));
+    }
+
+    @DeleteMapping("/EliminarRespuestas")
+    public ResponseEntity<String> deleteByIdMensaje(@RequestParam Integer idMensaje){
+        return ResponseEntity.ok(servicioMensajeRespuesta.deleteByIdMensaje(idMensaje));
     }
 }

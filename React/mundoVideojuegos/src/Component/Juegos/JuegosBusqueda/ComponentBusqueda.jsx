@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../ListaJuegos.css'
 
-function BusquedaSeleccionCompoenet() {
+function CompoenetBusqueda() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const nombre = queryParams.get('nombre'); // Aquí obtienes el nombre del juego
@@ -30,6 +30,8 @@ function BusquedaSeleccionCompoenet() {
         const resposive = await axios.get('http://localhost:8091/Juego/BuscarJuegos', {
           params: { nombre: nombre }
         }); 
+        //const resposive = await axios.get("http://localhost:8091/Juego"); //Se deja comentado para la prueba de errores como puede ser la paginacion
+
         
         setJuegos(resposive.data);
       } catch (error) {
@@ -43,10 +45,10 @@ function BusquedaSeleccionCompoenet() {
   }, [nombre]);
 
   // Manejar la selección de un juego
-  const handleSeleccionarJuego = (juego) => {
+  /*const handleSeleccionarJuego = (juego) => {
     // Pasar el objeto completo del juego como estado al navegar
     navigate('/publicacion', { state: { juego: juego } });
-  };
+  };*/
 
   return (
       <div className="lista-juegos-container">
@@ -62,8 +64,10 @@ function BusquedaSeleccionCompoenet() {
             <p><strong>Género 1:</strong> {juego.genero1}</p>
             {juego.genero2 && <p><strong>Género 2:</strong> {juego.genero2}</p>}
             <p><strong>Tipo:</strong> {juego.tipo}</p>
-            <button onClick={() => handleSeleccionarJuego(juego)}>Elegir juego</button>
-            </div>
+            <button onClick={() => navigate('/DetalleJuego', { state: { juego } })}>
+              Ver más detalles
+              </button>            
+              </div>
         </div>
         ))}
       </div>
@@ -82,4 +86,4 @@ function BusquedaSeleccionCompoenet() {
   );
 }
 
-export default BusquedaSeleccionCompoenet;
+export default CompoenetBusqueda;

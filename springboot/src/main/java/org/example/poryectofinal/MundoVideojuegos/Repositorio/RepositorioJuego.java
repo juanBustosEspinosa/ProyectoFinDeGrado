@@ -14,4 +14,6 @@ public interface RepositorioJuego extends JpaRepository<Juego,Integer> {
     boolean existsByNombre(String nombre);
     @Query("SELECT j FROM Juego j WHERE LOWER(j.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
     List<Juego> buscarPorNombre(String nombre);
+
+    List<Juego> findByIdDesarrollador_Id(Integer idDesarrolladorId);
 }

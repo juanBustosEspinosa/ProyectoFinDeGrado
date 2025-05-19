@@ -25,6 +25,11 @@ public class ControladorUsuario {
         return ResponseEntity.ok(servicioUsuario.getById(id));
     }
 
+    @GetMapping("/BuscaUsuario")
+    public ResponseEntity<List<Usuario>> getByNickname(@RequestParam String nickname){
+        return ResponseEntity.ok(servicioUsuario.buscarPorNickname(nickname));
+    }
+
     @GetMapping("/login")
     public ResponseEntity<Usuario> getByNickname(@RequestParam String nickname,@RequestParam String password){
         return ResponseEntity.ok(servicioUsuario.inicioSesion(nickname,password));
@@ -44,5 +49,6 @@ public class ControladorUsuario {
     public ResponseEntity<String> delete(@PathVariable int id){
         return ResponseEntity.ok(servicioUsuario.delete(id));
     }
+
 
 }

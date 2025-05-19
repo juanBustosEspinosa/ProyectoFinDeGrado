@@ -25,7 +25,9 @@ function ListaJuegos({ juegos }) {
               <p><strong>Género 1:</strong> {juego.genero1}</p>
               {juego.genero2 && <p><strong>Género 2:</strong> {juego.genero2}</p>}
               <p><strong>Tipo:</strong> {juego.tipo}</p>
-              <button onClick={() => navigate(`/juegos/${juego.id}`)}>Ver más detalles</button>
+              <button onClick={() => navigate('/DetalleJuego', { state: { juego } })}>
+              Ver más detalles
+              </button>
             </div>
           </div>
         ))}

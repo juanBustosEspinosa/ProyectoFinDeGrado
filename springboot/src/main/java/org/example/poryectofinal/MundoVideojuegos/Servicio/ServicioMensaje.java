@@ -27,6 +27,18 @@ public class ServicioMensaje {
         }
         return null;
     }
+
+    @Transactional
+    public  List<Mensaje> getAllByJuegoId(Integer id){
+        return repositorioMensaje.getMensajeByIdJuego_Id(id);
+    }
+
+    public  List<Mensaje> getAllByUsuarioId(Integer id){
+        return repositorioMensaje.getMensajeByIdUsuario_Id((id));
+    }
+
+
+
     @Transactional
     public String save(Mensaje mensaje){
         if (repositorioMensaje.existsByid(mensaje.getId())){

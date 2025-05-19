@@ -26,6 +26,11 @@ public class ServicioLikesDislike {
         return null;
     }
     @Transactional
+    public List<LikesDislike> getALLByRespuesta(Integer idMensajeRespuesta){
+        return repositorioLikesDislike.findByIdMensajeRespuesta_Id(idMensajeRespuesta);
+    }
+
+    @Transactional
     public String save(LikesDislike likesDislike){
         if (repositorioLikesDislike.existsByid(likesDislike.getId())){
             return "El nombre del Mensaje ya existe";
@@ -35,6 +40,8 @@ public class ServicioLikesDislike {
         }
 
     }
+
+
 
     @Transactional
     public List<LikesDislike> getLikesDisLikesUsuario (Integer usuario){
@@ -98,5 +105,26 @@ public class ServicioLikesDislike {
 
         repositorioLikesDislike.deleteById(likesDislike.getId());
         return "Se ha eliminado el LikeDislike";
+    }
+
+
+    public String deleteALLMensajes(Integer idMensaje){
+        List<LikesDislike> likesDislikes= repositorioLikesDislike.findByIdMensaje_Id(idMensaje);
+        if (!likesDislikes.isEmpty()) {
+            repositorioLikesDislike.deleteAll(likesDislikes);
+            return "Se ha eliminado el LikeDislike de todos";
+        }else {
+            return "No hay likes ni dislikes";
+        }
+    }
+
+    public String deleteALLRespuestas(Integer idMensajeRespuesta){
+        List<LikesDislike> likesDislikes= repositorioLikesDislike.findByIdMensajeRespuesta_Id((idMensajeRespuesta));
+        if (!likesDislikes.isEmpty()) {
+            repositorioLikesDislike.deleteAll(likesDislikes);
+            return "Se ha eliminado el LikeDislike de todos";
+        }else {
+            return "No hay likes ni dislikes";
+        }
     }
 }

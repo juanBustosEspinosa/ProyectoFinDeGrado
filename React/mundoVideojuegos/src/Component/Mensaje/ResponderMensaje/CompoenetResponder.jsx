@@ -24,19 +24,19 @@ function ComponentResponder() {
     }
   }, [juego]);*/
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
 
-    if (file) {
-      if (file.size > MAX_SIZE_BYTES) {
-        setError(`El archivo es demasiado grande. El tamaño máximo permitido es ${MAX_SIZE_MB} MB.`);
-        setImagen(null);  // Limpiar el archivo si es muy grande
-      } else {
-        setError(null);  // Limpiar el error si el archivo es válido
-        setImagen(file);  // Guardar el archivo en el estado si es válido
-      }
-    }
+  reader.onloadend = () => {
+    const base64String = reader.result.split(',')[1]; // solo base64
+    setImagen(base64String); // esto es lo que espera el backend
   };
+
+  if (file) {
+    reader.readAsDataURL(file); // importante usar .readAsDataURL
+  }
+};
 
   const handlePublicar = async (e) => {
     e.preventDefault();

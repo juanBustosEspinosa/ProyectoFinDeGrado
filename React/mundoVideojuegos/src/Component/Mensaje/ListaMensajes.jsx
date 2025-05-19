@@ -1,16 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import foto from "../../Fotos/foto.png";
+import foto from "../../Fotos/foto.webp";
 import "./ListaMensajes.css";
 import ListaRespuesta from './ListaRespuesta';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
-function ListaMensajes({ mensajes }) {
+
+
+function ListaMensajes({ mensajes,setMensajes}) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const [reacciones, setReacciones] = useState({});
   const [respuestasVisibles, setRespuestasVisibles] = useState({});
   const navigate = useNavigate();
+  const [suscripciones, setSuscripciones] = useState([]);
+
+
+
+useEffect(() => {
+  const obtenerSuscripciones = async () => {
+    try {
+      const response = await axios.get('http://localhost:8091/Seguir', {
+        params: { idUsuario: usuario.id }
+      });
+
+      // Accede correctamente a los usuarios seguidos (debes verificar cómo se estructura la respuesta)
+      const datos = response.data; // Asegúrate de que la respuesta sea 'response.data' y no 'response.datos'
+      
+      // Extrae los IDs de los usuarios seguidos
+      const idsSeguidos = datos.map(u => u.idSeguido.id); // Aquí se asume que 'idSeguido' es el campo correcto
+      setSuscripciones(idsSeguidos);
+
+    } catch (error) {
+      console.error("Error al cargar suscripciones:", error);
+    }
+  };
+
+  if (usuario?.id) {
+    obtenerSuscripciones();
+  }
+}, [usuario?.id]);
+
   
 
   useEffect(() => {
@@ -47,6 +77,90 @@ function ListaMensajes({ mensajes }) {
       [idMensaje]: !prev[idMensaje]
     }));
   };
+
+
+  const handleSuscripcion = async (idSeguido) => {
+  try {
+    const yaSigue = suscripciones.includes(idSeguido);
+
+    if (yaSigue) {
+      const nueva = {
+        idSeguidor: { id: usuario.id },  
+        idSeguido: { id: idSeguido }     
+      };
+
+      await axios.delete("http://localhost:8091/Seguir", {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: nueva
+      });
+
+      // Actualizamos el estado de las suscripciones
+      setSuscripciones(prev => prev.filter(id => id !== idSeguido));
+    } else {
+      const nueva = {
+        idSeguidor: { id: usuario.id },   
+        idSeguido: { id: idSeguido }     
+      };
+      await axios.post('http://localhost:8091/Seguir', nueva, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      // Actualizamos el estado de las suscripciones
+      setSuscripciones(prev => [...prev, idSeguido]);
+    }
+  } catch (error) {
+    console.error("Error al (des)seguir usuario:", error);
+  }
+};
+
+const handleEliminarPublicacion = async (id) => {
+  try {
+    const responsive =await axios.get('http://localhost:8091/LikesDislikes/Respuestas', {
+      params: { idMensajeRespuesta: id}
+    })
+    const data = responsive.data;
+    
+    console.log(data)
+    data.forEach(respuesta => {
+        axios.delete('http://localhost:8091/LikesDislikes/eliminarRespuestaALL',{
+      params:{idMensajeRespuesta: respuesta.id}
+    })
+      
+    });
+
+    await axios.delete('http://localhost:8091/MensajeRespuesta/EliminarRespuestas',{
+      params: {idMensaje:  id}
+    });
+    await axios.delete('http://localhost:8091/LikesDislikes/eliminarMensajeALL',{
+      params:{idMensaje: id}
+    })
+    await axios.delete('http://localhost:8091/Mensaje/EliminarMensaje',{
+      params:{id: id}
+    });
+    //Aqui actualizo los mensajes para que se eliminen
+    setMensajes(prev => prev.filter(m => m.id !== id));
+
+  } catch(error){
+    console.error("Error al Eliminar:", error);
+  }
+
+}
+
+
+
+
+
+const irAlPerfil = (usuario) => {
+  navigate('/Perfil', { state: { usuario } });
+};
+
+
+
+      console.log(suscripciones)
 
 
 
@@ -129,16 +243,25 @@ function ListaMensajes({ mensajes }) {
         {mensajes.map((mensaje, index) => {
           const mensajeId = mensaje.id.toString();
           const reaccionActual = reacciones[mensajeId];
-
           console.log("Mensaje:", mensaje.id, "Reacción actual:", reaccionActual); // debug
 
           return (
             <div key={index} className='mensaje'>
               <div className='nicknameUsuario'>
                 <div className="infoUsuario">
-                  <img className='perfilUsuario' src={foto} alt='perfil' />
+                <img className='perfilUsuario' src={mensaje.idUsuario.imagen ? `data:image/jpeg;base64,${mensaje.idUsuario.imagen}` : foto} alt='perfil' />
+                <a onClick={() => irAlPerfil(mensaje.idUsuario)} > {/**Hay que poner un style para que se vea cada vez que pasa el raton */}
                   {mensaje.idUsuario.nickname}
+                </a>
+              {mensaje.idUsuario.id !== usuario.id && (
+              <button onClick={() => handleSuscripcion(mensaje.idUsuario.id)}>
+              {suscripciones.includes(mensaje.idUsuario.id) ? 'Siguiendo' : 'Seguir'}
+              </button>
+            )}
                 </div>
+                { mensaje.idUsuario.id == usuario.id&& (
+                  <button onClick={() => handleEliminarPublicacion(mensaje.id)}> Eliminar Mensaje</button>
+                )}
                 <strong className='tituloJuego'>Reseña de {mensaje.idJuego.nombre}</strong>
               </div>
               <p className='contenidoMensaje'>{mensaje.descripcion}</p>
@@ -178,7 +301,7 @@ function ListaMensajes({ mensajes }) {
               
               {/** SI la respuestasVisbles del id es true se mostrara listaRespuesta pero si es falso no se muestra nada ya que se tiene que cumplir la primera opcion */}
               {respuestasVisibles[mensaje.id] && (
-                <ListaRespuesta mensajeId={mensaje.id} />
+                <ListaRespuesta mensajeId={mensaje.id} suscripciones={suscripciones} handleSuscripcion={handleSuscripcion} />
               )}
               </div>
           );

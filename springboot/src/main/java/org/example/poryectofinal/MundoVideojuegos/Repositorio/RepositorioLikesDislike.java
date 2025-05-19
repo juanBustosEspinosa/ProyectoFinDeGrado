@@ -1,9 +1,6 @@
 package org.example.poryectofinal.MundoVideojuegos.Repositorio;
 
-import jakarta.validation.constraints.NotNull;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.LikesDislike;
-import org.example.poryectofinal.MundoVideojuegos.Modulo.Mensaje;
-import org.example.poryectofinal.MundoVideojuegos.Modulo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +17,8 @@ public interface RepositorioLikesDislike  extends JpaRepository<LikesDislike,Int
     List<LikesDislike> findByIdUsuario_Id(Integer idUsuario);
 
     LikesDislike getLikesDislikeByIdUsuario_IdAndIdMensajeRespuesta_Id(Integer idUsuarioId, Integer idMensajeRespuestaId);
+
+    List<LikesDislike> findByIdMensaje_Id(Integer idMensajeId);
+
+    List<LikesDislike> findByIdMensajeRespuesta_Id(Integer idMensajeRespuestaId);
 }

@@ -3,15 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ListaJuegos from "./ListaJuegos";
 
-function ComponentJuego(){
+function ComponentJuego({idUsuario}){
 const [juegos ,setJuegos] = useState([]);
 
 useEffect(() => {
     const obtenerJuegos = async (e) => {
         try{
-            const resposive = await axios.get("http://localhost:8091/Juego");
-            const data = resposive.data;
-            setJuegos(data);
+            if (idUsuario == null){
+              const resposive = await axios.get("http://localhost:8091/Juego");
+              const data = resposive.data;
+              setJuegos(data);
+            } else {
+              const resposive = await axios.get("http://localhost:8091/Juego/BuscarJuegosUsuario", {
+                params: { id: idUsuario}
+              })
+              const data = resposive.data;
+              setJuegos(data);
+            }
+
         } catch (error){
             console.error("Error al obtener los Juegos:", error);
         }

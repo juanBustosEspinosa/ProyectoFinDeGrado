@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext";  
 import "./ComponentMenu.css";
-import foto from "../../Fotos/foto.png"
+import foto from "../../Fotos/foto.webp"
 
 function ComponentMenu() {
     const navigate = useNavigate();
@@ -36,8 +36,8 @@ function ComponentMenu() {
 
         <div className="navbar-right">
             {usuario ? (
-                <div className="usuario">
-                    <img src={foto} alt="perfil" className="perfil-img" />
+                <div className="usuario">                    
+                    <img src={usuario.imagen ? `data:image/jpeg;base64,${usuario.imagen}` : foto} alt="perfil" className="perfil-img" />
                     <span>{usuario.nickname}</span>
                     <button onClick={cerrarSesion} className="cerrar_sesion">Cerrar sesión</button>
                 </div>

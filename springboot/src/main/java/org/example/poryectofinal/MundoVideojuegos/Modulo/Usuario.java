@@ -62,6 +62,9 @@ public class Usuario {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
+    @Column(name = "imagen")
+    private byte[] imagen;
+
 //    @OneToOne(mappedBy = "idUsuario")
 //    private Disenousuario disenousuario;
 //
@@ -79,6 +82,14 @@ public class Usuario {
 //
 //    @OneToMany(mappedBy = "idUsuario1")
 //    private Set<Seguir> seguirs = new LinkedHashSet<>();
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 
     public Integer getId() {
         return id;

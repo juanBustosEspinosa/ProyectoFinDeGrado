@@ -1,0 +1,47 @@
+.perfil-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.perfil-usuario {
+  flex: 1;
+  max-width: 300px;
+  background-color: #f4f4f4;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.perfil-imagen {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 3px solid #ccc;
+}
+
+.perfil-usuario h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.perfil-usuario p {
+  margin: 0.3rem 0;
+  color: #555;
+}
+
+.perfil-mensajes {
+  flex: 2;
+  min-width: 300px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,67 @@
+.usuarios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .usuario-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  
+  .usuario-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .perfil-usuario {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .usuario-info {
+    text-align: center;
+  }
+  
+  .usuario-nickname {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 4px 0;
+  }
+  
+  .usuario-fecha {
+    font-size: 14px;
+    color: #666;
+  }
+  .paginacion {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .paginacion button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+  
+  .paginacion button.activa {
+    background-color: #3498db;
+    color: white;
+  }
