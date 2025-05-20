@@ -70,19 +70,21 @@ console.log(usuario);
   return(
 <div className="perfil-container">
   <div className="perfil-usuario">
+    <div className='perfil-usuario-header'>
     <img
       className="perfil-imagen"
       src={usuario.imagen ? `data:image/jpeg;base64,${usuario.imagen}` : foto}
       alt="perfil"
     />
-    <h1>{usuario.nickname}</h1>
-    <p>Fecha de creación: {usuario.fechaInicio}</p>
-    <p>Tipo: {usuario.tipo}</p>
-    <p>Seguidores: {totalseguidores}</p>
-    <p>Seguidos: {totalseguidor}</p>
-    { usuario.id == usuarioLocal.id && (
-    <button onClick={handleCrearJuego}>Crear juego</button>
-    )}
+    <h1 className='titulo-perfil'>{usuario.nickname}</h1>
+    </div>
+    <div className='perfil-usuario-body'>
+    <p className='fecha-perfil'>Fecha de creación: {usuario.fechaInicio}</p>
+    <p className='tipo-perfil'>Tipo: {usuario.tipo}</p>
+    <p className='total-perfil'>Seguidores: {totalseguidores}</p>
+    <p className='total-perfil'>Seguidos: {totalseguidor}</p>
+
+  </div>
   </div>
 
 <div className="perfil-tabs">
@@ -102,6 +104,10 @@ console.log(usuario);
       Juegos
     </button>
   )}
+  {usuario.id === usuarioLocal.id && usuarioLocal.tipo === "empresa" && (
+  <button className='btn-crearjuego-perfil' onClick={handleCrearJuego}>Crear juego</button>
+  
+)}
 </div>
 <div className="perfil-contenido">
   {vistaActiva === "mensajes" && (

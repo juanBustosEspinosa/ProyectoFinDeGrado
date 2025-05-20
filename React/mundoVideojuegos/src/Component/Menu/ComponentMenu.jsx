@@ -12,6 +12,9 @@ function ComponentMenu() {
         logout();
         navigate("/login");
     }
+    const irAlPerfil = () => {
+        navigate('/Perfil', { state: { usuario } });
+    };
 
     return (
     <nav className="navbar">
@@ -37,9 +40,10 @@ function ComponentMenu() {
         <div className="navbar-right">
             {usuario ? (
                 <div className="usuario">                    
-                    <img src={usuario.imagen ? `data:image/jpeg;base64,${usuario.imagen}` : foto} alt="perfil" className="perfil-img" />
-                    <span>{usuario.nickname}</span>
                     <button onClick={cerrarSesion} className="cerrar_sesion">Cerrar sesión</button>
+                    <span><NavLink to="/Perfil" state={{ usuario }}> {usuario.nickname}</NavLink></span>
+                    <img src={usuario.imagen ? `data:image/jpeg;base64,${usuario.imagen}` : foto} alt="perfil" className="perfil-img" />
+
                 </div>
             ) : (
                 <button className="InicioSesion2" onClick={() => navigate("/formulario")}>Iniciar Sesión</button>

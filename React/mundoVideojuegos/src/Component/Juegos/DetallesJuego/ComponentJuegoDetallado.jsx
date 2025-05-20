@@ -26,12 +26,14 @@ function ComponentJuegoDetallado() {
       <p><strong>Fecha de lanzamiento:</strong> {juego.fechaLanzamiento}</p>
       <p><strong>Género:</strong> {juego.genero1}{juego.genero2 ? ` / ${juego.genero2}` : ''}</p>
       <p><strong>Tipo:</strong> {juego.tipo}</p>
+      <h1 className="juego-nombre">Descripcion</h1>
       <p className="juego-descripcion">{juego.descripcion}</p>
     </div>
-  </div>
-  <div>
+      <div className='juego-mensajes'>
       <CompoenetMensaje idjuego={juego.id} idUsuario={null}/>
+    </div>
   </div>
+
 </div>
 
 

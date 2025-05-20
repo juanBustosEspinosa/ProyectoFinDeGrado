@@ -54,8 +54,9 @@ function App() {
 
             {/* Contenedor para los mensajes o el contenido dinámico */}
             <div className="contenido-principal">
-              <ComponentMensaje idjuego={null} idUsuario={null} />
               <ComponetBusquedaUsuario />
+
+              <ComponentMensaje idjuego={null} idUsuario={null} />
             </div>
             
 
@@ -81,8 +82,8 @@ function App() {
           <div className="contenedor-juegos">
           
             <div className="contenido-juego">
-              <ComponentJuego idUsuario={null} />
               <ComponentLectura/>
+              <ComponentJuego idUsuario={null} />
             </div>
           </div>
           <div className='footer'>

@@ -165,21 +165,21 @@ const handleEliminarPublicacion = async (id) => {
                   <a onClick={() => irAlPerfil(respuesta.idUsuario)}>
                     {respuesta.idUsuario.nickname}
                   </a>                {respuesta.idUsuario.id !== usuario.id && (
-                  <button onClick={() => handleSuscripcion(respuesta.idUsuario.id)}>
+                  <button className='btn-suscripcion' onClick={() => handleSuscripcion(respuesta.idUsuario.id)}>
                   {suscripciones.includes(respuesta.idUsuario.id) ? 'Siguiendo' : 'Seguir'}
                   </button>
                 )}
               </div>
               <div>
                 { respuesta.idUsuario.id == usuario.id && (
-                  <button onClick={() => handleEliminarPublicacion(respuesta.id)}> Eliminar Mensaje</button>
+                  <button className='btn-eliminar' onClick={() => handleEliminarPublicacion(respuesta.id)}> Eliminar Mensaje</button>
                 )}
                 <strong className='tituloJuego'>Reseña de {respuesta.idJuego.nombre}</strong>
               </div>
             </div>
             <p className='contenidoMensaje'>{respuesta.descripcion}</p>
             {respuesta.imagen != null &&(
-            <img src={`data:image/jpeg;base64,${respuesta.imagen}`} alt="" />
+            <img className='imgRespuesta' src={`data:image/jpeg;base64,${respuesta.imagen}`} alt="" />
             )}
             <p className='puntuacion'>
               {[...Array(5)].map((_, i) => {

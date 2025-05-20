@@ -238,7 +238,6 @@ const irAlPerfil = (usuario) => {
 
   return (
     <div>
-      <h2>Mensajes:</h2>
       <div className='listaMensaje'>
         {mensajes.map((mensaje, index) => {
           const mensajeId = mensaje.id.toString();
@@ -254,13 +253,16 @@ const irAlPerfil = (usuario) => {
                   {mensaje.idUsuario.nickname}
                 </a>
               {mensaje.idUsuario.id !== usuario.id && (
-              <button onClick={() => handleSuscripcion(mensaje.idUsuario.id)}>
-              {suscripciones.includes(mensaje.idUsuario.id) ? 'Siguiendo' : 'Seguir'}
-              </button>
+                <button
+                className={`btn-suscribirse ${suscripciones.includes(mensaje.idUsuario.id) ? 'siguiendo' : ''}`}
+                onClick={() => handleSuscripcion(mensaje.idUsuario.id)}
+                >
+                  {suscripciones.includes(mensaje.idUsuario.id) ? 'Siguiendo' : 'Seguir'}   
+                </button>
             )}
                 </div>
                 { mensaje.idUsuario.id == usuario.id&& (
-                  <button onClick={() => handleEliminarPublicacion(mensaje.id)}> Eliminar Mensaje</button>
+                  <button className='btn-eliminar' onClick={() => handleEliminarPublicacion(mensaje.id)}> Eliminar Mensaje</button>
                 )}
                 <strong className='tituloJuego'>Reseña de {mensaje.idJuego.nombre}</strong>
               </div>
@@ -297,7 +299,7 @@ const irAlPerfil = (usuario) => {
               <button className='btn-ver-respuestas' onClick={() => toggleRespuestas(mensaje.id)}>
                 {respuestasVisibles[mensaje.id] ? 'Ocultar respuestas' : 'Ver respuestas'}
               </button>
-              <button className='' onClick={() => HandleRespuesta(mensaje)}>Responder</button>
+              <button className='btn-responder' onClick={() => HandleRespuesta(mensaje)}>Responder</button>
               
               {/** SI la respuestasVisbles del id es true se mostrara listaRespuesta pero si es falso no se muestra nada ya que se tiene que cumplir la primera opcion */}
               {respuestasVisibles[mensaje.id] && (

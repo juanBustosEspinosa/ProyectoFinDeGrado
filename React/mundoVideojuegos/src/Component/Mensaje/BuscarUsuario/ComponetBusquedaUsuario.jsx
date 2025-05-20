@@ -13,15 +13,15 @@ function ComponetBusquedaUsuario(){
     }
 
     return (
-        <div>
+        <div className="busqueda-container">
             <input
                 type="text"
-                className="input-nickname"
+                className="input-Busqueda"
                 value={nickname}
                 onChange={(e) => setnickname(e.target.value)}
                 placeholder="Escribe el nickname del Usuario"
             />    
-            <button onClick={handleClick}>Enviar</button>    
+            <button className='btn-envioBusquedaJuego' onClick={handleClick}>Enviar</button>    
         </div>
     )
 

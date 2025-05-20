@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import './ComponentLectura.css'
 
 
 function ComponentLectura(){
@@ -13,15 +14,15 @@ function ComponentLectura(){
     }
 
     return (
-        <div>
+        <div className="busqueda-container">
             <input
                 type="text"
-                className="input-nombre"
+                className="input-Busqueda"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Escribe el nombre del juego"
             />    
-            <button onClick={handleClick}>Enviar</button>    
+            <button className='btn-envioBusquedaJuego' onClick={handleClick}>Enviar</button>    
         </div>
     )
 
