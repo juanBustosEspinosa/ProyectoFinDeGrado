@@ -111,11 +111,11 @@ console.log(usuario);
 </div>
 <div className="perfil-contenido">
   {vistaActiva === "mensajes" && (
-    <ComponentMensaje idjuego={null} idUsuario={usuario.id} />
+    <ComponentMensaje idjuego={null} idUsuario={usuario.id} mes={false} />
   )}
 
   {vistaActiva === "juegos" && (
-    <ComponentJuego idUsuario={usuario.id} />
+    <ComponentJuego idUsuario={usuario.id} mes={false}/>
   )}
 </div>
 </div>

@@ -20,6 +20,10 @@ public class ControladorUsuario {
     public ResponseEntity<List<Usuario>> getAll(){
         return ResponseEntity.ok(servicioUsuario.getAll());
     }
+    @GetMapping("/UsuarioMes")
+    public ResponseEntity<List<Usuario>> getByMes(){
+        return ResponseEntity.ok(servicioUsuario.getUsuarioDelMes());
+    }
     @GetMapping("{id}")
     public ResponseEntity<Usuario> getById(@PathVariable int id){
         return ResponseEntity.ok(servicioUsuario.getById(id));

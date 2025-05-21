@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,7 +38,13 @@ public class ServicioMensaje {
         return repositorioMensaje.getMensajeByIdUsuario_Id((id));
     }
 
+    public List<Mensaje> getMensajesDelMes(){
+        LocalDate ahora = LocalDate.now();
+        int mesActual = ahora.getMonthValue();
+        int anioActual = ahora.getYear();
 
+        return repositorioMensaje.buscarMensajesDelMes(mesActual, anioActual);
+    }
 
     @Transactional
     public String save(Mensaje mensaje){

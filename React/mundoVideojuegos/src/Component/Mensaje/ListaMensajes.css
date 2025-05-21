@@ -185,3 +185,31 @@
 .btn-eliminar:hover {
   background-color: #b91c1c;
 }
+.cargar-mas {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-cargar-mas {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2d89ef;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn-cargar-mas:hover {
+  background-color: #1e70bf;
+}
+
+.usuarioPerfil{
+    color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.usuarioPerfil:hover {
+  color: #00bfff;
+}

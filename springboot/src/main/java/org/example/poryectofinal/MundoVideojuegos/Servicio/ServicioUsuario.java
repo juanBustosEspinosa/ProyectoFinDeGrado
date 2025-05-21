@@ -1,12 +1,14 @@
 package org.example.poryectofinal.MundoVideojuegos.Servicio;
 
 import org.example.poryectofinal.MundoVideojuegos.Excepciones.UsuarioNoEncontradoException;
+import org.example.poryectofinal.MundoVideojuegos.Modulo.Mensaje;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Usuario;
 import org.example.poryectofinal.MundoVideojuegos.Repositorio.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,6 +27,15 @@ public class ServicioUsuario {
         }
         return null;
     }
+    public List<Usuario> getUsuarioDelMes(){
+        LocalDate ahora = LocalDate.now();
+        int mesActual = ahora.getMonthValue();
+        int anioActual = ahora.getYear();
+
+        return repositorioUsuario.buscarUsuariosDelMes(mesActual, anioActual);
+    }
+
+
 
     @Transactional
     public Usuario inicioSesion(String nickname, String password) {
@@ -41,8 +52,9 @@ public class ServicioUsuario {
     }
     @Transactional
     public String save(Usuario usuario){
+
         if (repositorioUsuario.existsByNickname(usuario.getNickname())){
-            return "El nombre del usuario ya existe";
+            throw new IllegalArgumentException ("El nombre del usuario ya existe");
         }else {
             repositorioUsuario.save(usuario);
             return "Se ha creado el usuario";

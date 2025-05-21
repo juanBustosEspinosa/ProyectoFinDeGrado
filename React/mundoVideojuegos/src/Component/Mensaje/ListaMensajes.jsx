@@ -14,6 +14,8 @@ function ListaMensajes({ mensajes,setMensajes}) {
   const [respuestasVisibles, setRespuestasVisibles] = useState({});
   const navigate = useNavigate();
   const [suscripciones, setSuscripciones] = useState([]);
+  const [mensajesMostrados, setMensajesMostrados] = useState(5);
+
 
 
 
@@ -239,7 +241,7 @@ const irAlPerfil = (usuario) => {
   return (
     <div>
       <div className='listaMensaje'>
-        {mensajes.map((mensaje, index) => {
+{mensajes.slice(0, mensajesMostrados).map((mensaje, index) => {
           const mensajeId = mensaje.id.toString();
           const reaccionActual = reacciones[mensajeId];
           console.log("Mensaje:", mensaje.id, "Reacción actual:", reaccionActual); // debug
@@ -249,7 +251,7 @@ const irAlPerfil = (usuario) => {
               <div className='nicknameUsuario'>
                 <div className="infoUsuario">
                 <img className='perfilUsuario' src={mensaje.idUsuario.imagen ? `data:image/jpeg;base64,${mensaje.idUsuario.imagen}` : foto} alt='perfil' />
-                <a onClick={() => irAlPerfil(mensaje.idUsuario)} > {/**Hay que poner un style para que se vea cada vez que pasa el raton */}
+                <a className='usuarioPerfil' onClick={() => irAlPerfil(mensaje.idUsuario)} > {/**Hay que poner un style para que se vea cada vez que pasa el raton */}
                   {mensaje.idUsuario.nickname}
                 </a>
               {mensaje.idUsuario.id !== usuario.id && (
@@ -297,7 +299,7 @@ const irAlPerfil = (usuario) => {
 
               {/**Esto su unica funcion es mostrar las respuestas de cada mensaje */}
               <button className='btn-ver-respuestas' onClick={() => toggleRespuestas(mensaje.id)}>
-                {respuestasVisibles[mensaje.id] ? 'Ocultar respuestas' : 'Ver respuestas'}
+                {respuestasVisibles[mensaje.id] ? 'Ocultar respuestas ᐃ' : 'Ver respuestas ᐁ'}
               </button>
               <button className='btn-responder' onClick={() => HandleRespuesta(mensaje)}>Responder</button>
               
@@ -309,6 +311,15 @@ const irAlPerfil = (usuario) => {
           );
         })}
       </div>
+      <div className="cargar-mas">
+  {mensajesMostrados < mensajes.length ? (
+    <button className="btn-cargar-mas" onClick={() => setMensajesMostrados(prev => prev + 5)}>
+      Cargar más mensajes ⭮
+    </button>
+  ) : (
+    <p>No hay más mensajes</p>
+  )}
+</div>
     </div>
   );
 }

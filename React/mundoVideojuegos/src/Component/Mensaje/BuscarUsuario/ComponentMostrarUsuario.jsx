@@ -7,7 +7,7 @@ import "./ComponentMostrarUsuario.css";
 
 
 
-function ComponentMostrarUsuario(){
+function ComponentMostrarUsuario({mes}){
     const location = useLocation();
     const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
@@ -23,13 +23,16 @@ function ComponentMostrarUsuario(){
 
 
     useEffect(() => {
-        const obtenerJuegos = async () => {
+        const obtenerUsuarios = async () => {
+          let resposive;
           try {
-            const resposive = await axios.get('http://localhost:8091/Usuario/BuscaUsuario', {
+            if (!mes){
+            resposive = await axios.get('http://localhost:8091/Usuario/BuscaUsuario', {
               params: { nickname: nickname }
             }); 
-            //const resposive = await axios.get("http://localhost:8091/Juego"); //Se deja comentado para la prueba de errores como puede ser la paginacion
-    
+            } else {
+              resposive = await axios.get('http://localhost:8091/Usuario/UsuarioMes')
+            }
             
             setUsuarios(resposive.data);
           } catch (error) {
@@ -37,8 +40,8 @@ function ComponentMostrarUsuario(){
           }
         };
     
-        if (nickname) {
-          obtenerJuegos();
+        if (nickname || mes) {
+          obtenerUsuarios();
         }
       }, [nickname]);
       const irAlPerfil = (usuario) => {

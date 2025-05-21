@@ -30,7 +30,7 @@ function ComponentJuegoDetallado() {
       <p className="juego-descripcion">{juego.descripcion}</p>
     </div>
       <div className='juego-mensajes'>
-      <CompoenetMensaje idjuego={juego.id} idUsuario={null}/>
+      <CompoenetMensaje idjuego={juego.id} idUsuario={null} mes={false}/>
     </div>
   </div>
 

@@ -3,23 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ListaJuegos from "./ListaJuegos";
 
-function ComponentJuego({idUsuario}){
+function ComponentJuego({idUsuario, mes}){
 const [juegos ,setJuegos] = useState([]);
 
 useEffect(() => {
     const obtenerJuegos = async (e) => {
+      let responsive;
         try{
-            if (idUsuario == null){
-              const resposive = await axios.get("http://localhost:8091/Juego");
-              const data = resposive.data;
-              setJuegos(data);
-            } else {
-              const resposive = await axios.get("http://localhost:8091/Juego/BuscarJuegosUsuario", {
+            if (idUsuario == null && !mes ){
+              responsive = await axios.get("http://localhost:8091/Juego");
+
+            }else if (mes){
+              responsive = await axios.get("http://localhost:8091/Juego/JuegoMes");
+            } 
+            else {
+              responsive = await axios.get("http://localhost:8091/Juego/BuscarJuegosUsuario", {
                 params: { id: idUsuario}
               })
-              const data = resposive.data;
-              setJuegos(data);
             }
+              const data = responsive.data;
+              setJuegos(data);
 
         } catch (error){
             console.error("Error al obtener los Juegos:", error);

@@ -49,6 +49,10 @@ const handleFileChange = (e) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+            if (telefono < 100000000 || telefono > 999999999) {
+              alert("Pon bien tu numero de telefono");
+              return;
+            }
         try {
           // Llamada a la API con Post para autenticar al usuario
           const response = await axios.post("http://localhost:8091/Usuario", usuarioData);
@@ -87,7 +91,7 @@ const handleFileChange = (e) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Ingresa tu usuario"
-              />
+              required/>
             </div>
 
             {/* CONTRASEÑA */}
@@ -100,7 +104,7 @@ const handleFileChange = (e) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Ingresa tu contraseña"
-              />
+              required/>
             </div>
 
             {/* TELEFONO */}
@@ -113,7 +117,7 @@ const handleFileChange = (e) => {
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
                 placeholder="Ingresa tu Telefono"
-              />
+              required/>
             </div>
 
             {/* TIPO */}
@@ -122,9 +126,8 @@ const handleFileChange = (e) => {
             <div>
                 <label>Tipo</label>
                 <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-                    <option value="">Selecciona una opción</option>
-                    <option value="empresa">Empresa</option>
                     <option value="usuario">Usuario</option>
+                    <option value="empresa">Empresa</option>
                 </select>
             </div>
 
@@ -138,7 +141,7 @@ const handleFileChange = (e) => {
                 value={correo}
                 onChange={(e) => setCorreo(e.target.value)}
                 placeholder="Ingresa tu correo"
-                />
+                required/>
             </div>
 
             {/* NOMBRE */}
@@ -150,7 +153,7 @@ const handleFileChange = (e) => {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Ingresa tu Nombre"
-                />
+                required/>
             </div>
             
             

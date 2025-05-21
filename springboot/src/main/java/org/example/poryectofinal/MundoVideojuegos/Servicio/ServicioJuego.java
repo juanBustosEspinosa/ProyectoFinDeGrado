@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class ServicioJuego {
@@ -25,6 +26,14 @@ public class ServicioJuego {
             return repositorioJuego.getJuegoById(id);
         }
         return null;
+    }
+
+    public List<Juego> getJuegoMes(){
+        LocalDate ahora = LocalDate.now();
+        int mesActual = ahora.getMonthValue();
+        int anioActual = ahora.getYear();
+
+        return repositorioJuego.buscarJuegosDelMes(mesActual, anioActual);
     }
     @Transactional
     public String save(Juego juego){
@@ -80,4 +89,6 @@ public class ServicioJuego {
         repositorioJuego.deleteById(id);
         return "Se ha eliminado el juego";
     }
+
+
 }

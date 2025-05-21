@@ -1,8 +1,7 @@
 package org.example.poryectofinal.MundoVideojuegos.Modulo;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -18,7 +17,8 @@ public class Usuario {
     private Integer id;
 
     @NotNull
-    @Column(name = "telefono", nullable = false)
+    @Min(value = 100000000, message = "El teléfono debe tener 9 dígitos")
+    @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos")    @Column(name = "telefono", nullable = false)
     private Integer telefono;
 
     @Size(max = 255)

@@ -22,6 +22,10 @@ public class ControladorMensaje {
     public ResponseEntity<List<Mensaje>> getAll(){
         return ResponseEntity.ok(servicioMensaje.getAll());
     }
+    @GetMapping("/MensajeMes")
+    public ResponseEntity<List<Mensaje>> getMensajeMes(){
+        return ResponseEntity.ok(servicioMensaje.getMensajesDelMes());
+    }
     @GetMapping("{id}")
     public ResponseEntity<Mensaje> getById(@PathVariable int id){
         return ResponseEntity.ok(servicioMensaje.getById(id));
@@ -35,6 +39,7 @@ public class ControladorMensaje {
     public ResponseEntity<List<Mensaje>> getUsuario(@RequestParam Integer id){
         return ResponseEntity.ok(servicioMensaje.getAllByUsuarioId(id));
     }
+
 
     @PostMapping
     public ResponseEntity<String> add(@Valid @RequestBody Mensaje mensaje){

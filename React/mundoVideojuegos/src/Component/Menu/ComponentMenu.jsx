@@ -28,8 +28,10 @@ function ComponentMenu() {
             <li className="submenu">
                 <a href="#">Tendencias ▾</a>
                 <ul className="dropdown">
-                    <li><NavLink to="/">Juegos Del Mes</NavLink></li>
-                    <li><NavLink to="/">Mas Hablado</NavLink></li>
+                    <li><NavLink to="/juegosMes">Juegos Del Mes</NavLink></li>
+                    <li><NavLink to="/MensajeMes">Mas Hablado</NavLink></li>
+                    <li><NavLink to="/UsuarioMes">Nuevos Usuario del Mes</NavLink></li>
+
                 </ul>
             </li>
 

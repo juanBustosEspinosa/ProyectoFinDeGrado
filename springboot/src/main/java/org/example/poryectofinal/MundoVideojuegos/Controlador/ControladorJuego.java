@@ -36,6 +36,10 @@ public class ControladorJuego {
     public ResponseEntity<List<Juego>> buscarJuegosUsuario(@RequestParam Integer id){
         return ResponseEntity.ok(servicioJuego.getJuegoByUsuario(id));
     }
+    @GetMapping("/JuegoMes")
+    public ResponseEntity<List<Juego>> buscarJuegoMes(){
+        return ResponseEntity.ok(servicioJuego.getJuegoMes());
+    }
 
     @PostMapping
     public ResponseEntity<String> add(@Valid @RequestBody Juego juego){

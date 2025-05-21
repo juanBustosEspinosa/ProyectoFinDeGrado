@@ -56,7 +56,7 @@ function App() {
             <div className="contenido-principal">
               <ComponetBusquedaUsuario />
 
-              <ComponentMensaje idjuego={null} idUsuario={null} />
+              <ComponentMensaje idjuego={null} idUsuario={null} mes={false}/>
             </div>
             
 
@@ -83,7 +83,7 @@ function App() {
           
             <div className="contenido-juego">
               <ComponentLectura/>
-              <ComponentJuego idUsuario={null} />
+              <ComponentJuego idUsuario={null} mes={false}/>
             </div>
           </div>
           <div className='footer'>
@@ -215,12 +215,67 @@ function App() {
             <ComponentMenu />
           </div>        
           <div className="contenido-principal-perfil">
-           <ComponentMostrarUsuario/>             
+           <ComponentMostrarUsuario mes={false}/>             
           </div>
           <div className='footer'>
               <ComponentFooter />
           </div>          
           </div>: <Navigate to="/login"/>}
+        />
+        <Route
+        path="/UsuarioMes"
+        element={isAuthenticated ? <div className="pagina-contenedor"> 
+          <div className="menu-fijo">
+            <ComponentMenu />
+          </div>        
+          <div className="contenido-principal-perfil">
+           <ComponentMostrarUsuario mes={true}/>             
+          </div>
+          <div className='footer'>
+              <ComponentFooter />
+          </div>          
+          </div>: <Navigate to="/login"/>}
+        />
+
+        <Route
+        path='/juegosMes'
+        element={isAuthenticated ?
+          <div className="pagina-contenedor">
+              <div className="menu-fijo">
+                <ComponentMenu />
+              </div> 
+          <div className="contenedor-juegos">
+          
+            <div className="contenido-juego">
+              <ComponentJuego idUsuario={null} mes={true}/>
+            </div>
+          </div>
+          <div className='footer'>
+              <ComponentFooter />
+          </div>
+          </div>: <Navigate to="/login"/> }
+        />
+
+          <Route
+          path="/MensajeMes"
+          element={isAuthenticated ?     
+          <div className="pagina-contenedor">
+            {/* Menú fijo en la parte superior */}
+            <div className="menu-fijo">
+              <ComponentMenu />
+            </div>
+
+            {/* Contenedor para los mensajes o el contenido dinámico */}
+            <div className="contenido-principal">
+
+              <ComponentMensaje idjuego={null} idUsuario={null} mes={true}/>
+            </div>
+            
+
+            <div className='footer'>
+              <ComponentFooter />
+            </div>
+          </div> : <Navigate to="/login" />}
         />
 
 
