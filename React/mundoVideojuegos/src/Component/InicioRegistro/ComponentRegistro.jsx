@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import "./ComponentRegistro.css"
 
 function ComponentRegistro(){
 
@@ -31,7 +32,9 @@ function ComponentRegistro(){
     imagen: imagen
   };
   const [error, setError] = useState('');
-
+const gotoLogin = () => {
+          navigate("/login");
+}
 
 const handleFileChange = (e) => {
   const file = e.target.files[0];
@@ -78,108 +81,108 @@ const handleFileChange = (e) => {
 
 
     return (
-        <div>
-          <form onSubmit={handleLogin}>
+<div className="registro-container"> 
+<h1 className="registro-titulo">Registro</h1>
+  <form className="registro-form" onSubmit={handleLogin}>
+    <div className="registro-input-group">
+      <label className="registro-label">Nickname</label>
+      <input
+        type="text"
+        className="registro-input"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Ingresa tu usuario"
+        required
+      />
+    </div>
 
-            {/* NICKNAME */}
+    <div className="registro-input-group">
+      <label className="registro-label">Contraseña</label>
+      <input
+        type="password"
+        className="registro-input"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Ingresa tu contraseña"
+        required
+      />
+    </div>
 
+    <div className="registro-input-group">
+      <label className="registro-label">Teléfono</label>
+      <input
+        type="text"
+        className="registro-input"
+        value={telefono}
+        onChange={(e) => setTelefono(e.target.value)}
+        placeholder="Ingresa tu teléfono"
+        required
+      />
+    </div>
 
-            <div>
-              <label>Nickname</label>
-              <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Ingresa tu usuario"
-              required/>
-            </div>
+    <div className="registro-input-group">
+      <label className="registro-label">Tipo</label>
+      <select
+        className="registro-input"
+        value={tipo}
+        onChange={(e) => setTipo(e.target.value)}
+      >
+        <option value="usuario">Usuario</option>
+        <option value="empresa">Empresa</option>
+      </select>
+    </div>
 
-            {/* CONTRASEÑA */}
+    <div className="registro-input-group">
+      <label className="registro-label">Correo</label>
+      <input
+        type="email"
+        className="registro-input"
+        value={correo}
+        onChange={(e) => setCorreo(e.target.value)}
+        placeholder="Ingresa tu correo"
+        required
+      />
+    </div>
 
+    <div className="registro-input-group">
+      <label className="registro-label">Nombre</label>
+      <input
+        type="text"
+        className="registro-input"
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        placeholder="Ingresa tu nombre"
+        required
+      />
+    </div>
 
-            <div>
-              <label>Contraseña</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ingresa tu contraseña"
-              required/>
-            </div>
+    <div className="registro-input-group">
+      <label className="registro-label">Apellido</label>
+      <input
+        type="text"
+        className="registro-input"
+        value={apellido}
+        onChange={(e) => setApellido(e.target.value)}
+        placeholder="Ingresa tu apellido"
+      />
+    </div>
 
-            {/* TELEFONO */}
+    <div className="registro-input-group">
+      <label className="registro-label">Foto de perfil</label>
+      <input
+        type="file"
+        accept="image/*"
+        className="registro-input-imagen"
+        onChange={handleFileChange}
+      />
+    </div>
 
+    <button className="registro-button" type="submit">Registrar</button>
+    <button className="registro-button secondary" type="button" onClick={gotoLogin}>Volver Login</button>
+  </form>
 
-            <div>
-              <label>Telefono</label>
-              <input
-                type="text"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-                placeholder="Ingresa tu Telefono"
-              required/>
-            </div>
-
-            {/* TIPO */}
-
-
-            <div>
-                <label>Tipo</label>
-                <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-                    <option value="usuario">Usuario</option>
-                    <option value="empresa">Empresa</option>
-                </select>
-            </div>
-
-            {/* CORREO */}
-
-
-            <div>
-                <label>Correo</label>
-                <input
-                type="email"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-                placeholder="Ingresa tu correo"
-                required/>
-            </div>
-
-            {/* NOMBRE */}
-
-            <div>
-                <label>Nombre</label>
-                <input
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ingresa tu Nombre"
-                required/>
-            </div>
-            
-            
-            {/* APELLIDO */}
-            <div>
-                <label>Apellido</label>
-                <input
-                type="text"
-                value={apellido}
-                onChange={(e) => setApellido(e.target.value)}
-                placeholder="Ingresa tu Apellido"
-                />
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              className="input-imagen"
-              onChange={handleFileChange}
-            />
-
-            <button type="submit">Registro</button>
-          </form>
-          
-          {/* Si hay un error, se muestra aquí */}
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </div>
+  {error && <p className="registro-error">{error}</p>}
+</div>
       );
 
 

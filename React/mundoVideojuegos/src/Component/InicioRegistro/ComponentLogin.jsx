@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import './ComponentLogin.css'
 
 function ComponentLogin() {
   const [username, setUsername] = useState('');
@@ -44,34 +45,35 @@ function ComponentLogin() {
     navigate("/registro"); // Redirige a la página de registro
   };
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Usuario</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Ingresa tu usuario"
-          />
-        </div>
-        <div>
-          <label>Contraseña</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Ingresa tu contraseña"
-          />
-        </div>
-        <button type="submit">Iniciar sesión</button>
-      {/* Botón para redirigir al registro */}
-      <button type="button" onClick={goToRegister}>Registro</button>      
-      </form>
-      
-      {/* Si hay un error, se muestra aquí */}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+<div className="login-container">
+  <h1 className="login-titulo">Login</h1>
+  <form onSubmit={handleLogin} className="login-form">
+    <div className="login-input-group">
+      <label className="login-label">Usuario</label>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Ingresa tu usuario"
+        className="login-input"
+      />
     </div>
+    <div className="login-input-group">
+      <label className="login-label">Contraseña</label>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Ingresa tu contraseña"
+        className="login-input"
+      />
+    </div>
+    <button type="submit" className="login-button">Iniciar sesión</button>
+    <button type="button" onClick={goToRegister} className="login-button secondary">Registro</button>
+  </form>
+
+  {error && <p className="login-error">{error}</p>}
+</div>
   );
 }
 
