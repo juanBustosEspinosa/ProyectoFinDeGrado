@@ -5,6 +5,8 @@ import org.example.poryectofinal.MundoVideojuegos.Modulo.Mensaje;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Usuario;
 import org.example.poryectofinal.MundoVideojuegos.Repositorio.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import java.util.List;
 public class ServicioUsuario {
     @Autowired
     private RepositorioUsuario repositorioUsuario;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public List<Usuario> getAll(){
@@ -44,7 +48,7 @@ public class ServicioUsuario {
             throw new UsuarioNoEncontradoException("El usuario con nickname " + nickname + " no fue encontrado.");
         }
 
-        if (!usuario.getContrasena().equals(password)) {
+        if (!passwordEncoder.matches(password, usuario.getContrasena())) {
             throw new IllegalArgumentException("Contraseña incorrecta.");
         }
 
@@ -55,7 +59,13 @@ public class ServicioUsuario {
 
         if (repositorioUsuario.existsByNickname(usuario.getNickname())){
             throw new IllegalArgumentException ("El nombre del usuario ya existe");
-        }else {
+        } else if (repositorioUsuario.existsByCorreo(usuario.getCorreo())) {
+            throw new IllegalArgumentException ("El correo ya existe");
+        } else if (repositorioUsuario.existsByTelefono(usuario.getTelefono())) {
+            throw new IllegalArgumentException ("El telefono ya existe");
+        } else {
+            String passwordHash = passwordEncoder.encode(usuario.getContrasena());
+            usuario.setContrasena(passwordHash);
             repositorioUsuario.save(usuario);
             return "Se ha creado el usuario";
         }

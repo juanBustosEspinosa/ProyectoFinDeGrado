@@ -131,7 +131,7 @@ function App() {
             <div className="menu-fijo">
               <ComponentMenu />
             </div>
-          <div className="contenido-principal-busqueda">
+          <div className="contenido-principal-eleccion">
           <BusquedaSeleccionCompoenet /> 
           </div>   
           <div className='footer'>

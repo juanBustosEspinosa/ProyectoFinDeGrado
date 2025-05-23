@@ -1,6 +1,6 @@
 .lista-juegos {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columnas por fila */
+    grid-template-columns: repeat(4, 1fr); /* 5 columnas por fila */
     gap: 20px;
     padding: 20px;
     justify-items: center;
@@ -84,3 +84,49 @@
     background-color: #3498db;
     color: white;
   }
+
+  /* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+  .lista-juegos {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .lista-juegos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-juegos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .juego-card img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lista-juegos {
+    grid-template-columns: 1fr;
+  }
+
+  .juego-card {
+    max-width: 100%;
+  }
+
+  .juego-card img {
+    height: 160px;
+  }
+
+  .juego-card h2 {
+    font-size: 16px;
+  }
+
+  .juego-card p,
+  .juego-card button {
+    font-size: 13px;
+  }
+}

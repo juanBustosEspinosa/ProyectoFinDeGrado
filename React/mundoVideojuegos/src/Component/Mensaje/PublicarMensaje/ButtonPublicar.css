@@ -22,3 +22,46 @@
   .boton-publicar:hover {
     background-color: #45a049;
   }
+  .contenedor-boton {
+  position: fixed;
+  bottom: 120px; /* espacio para footer */
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 101;
+  /* Ajuste para móviles */
+}
+
+.boton-publicar {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.boton-publicar:hover {
+  background-color: #45a049;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+  .contenedor-boton {
+    bottom: 80px; /* menos espacio para footer en móvil */
+    right: 50%;
+    transform: translateX(50%);
+    width: auto;
+    padding: 0 10px;
+  }
+
+  .boton-publicar {
+    font-size: 14px;
+    padding: 8px 16px;
+    width: 90vw; /* casi todo el ancho */
+    max-width: 300px;
+    border-radius: 12px;
+  }
+}

@@ -93,6 +93,7 @@ const handleFileChange = (e) => {
 
   return (
 <div className="form-container">
+  <h1 className='publicar-titulo'>Publicar Mensaje</h1>
   <input
     type="text"
     className="input-nombre"

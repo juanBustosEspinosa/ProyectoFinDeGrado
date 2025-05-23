@@ -88,3 +88,65 @@
   padding-top: 10rem;
   width: 100%;
 }
+/* RESPONSIVE */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .perfil-usuario-body {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .perfil-imagen {
+    width: 120px;
+    height: 120px;
+    margin: 0.5rem;
+  }
+
+  .titulo-perfil {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .perfil-usuario-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .perfil-usuario-body {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .perfil-imagen {
+    width: 100px;
+    height: 100px;
+    margin: 0.5rem auto;
+  }
+
+  .titulo-perfil {
+    font-size: 1.4rem;
+  }
+
+  .btn-crearjuego-perfil {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .perfil-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .perfil-tabs button {
+    width: 100%;
+  }
+
+  .perfil-contenido {
+    padding-top: 2rem;
+  }
+}

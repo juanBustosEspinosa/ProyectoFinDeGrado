@@ -154,3 +154,87 @@
 .btn-eliminar:hover {
   background-color: #991b1b;
 }
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .respuesta {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .nicknameUsuario {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .tituloJuego {
+    font-size: 12px;
+  }
+
+  .contenidoMensaje {
+    font-size: 14px;
+  }
+
+  .puntuacion {
+    font-size: 15px;
+  }
+
+  .estrella {
+    font-size: 16px;
+  }
+
+  .btn-like, .btn-dislike, .btn-suscripcion, .btn-eliminar {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
+  .reacciones {
+    gap: 6px;
+  }
+
+  .imgRespuesta {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .respuesta {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .nicknameUsuario {
+    font-size: 13px;
+  }
+
+  .tituloJuego {
+    font-size: 11px;
+  }
+
+  .contenidoMensaje {
+    font-size: 13px;
+  }
+
+  .puntuacion {
+    font-size: 14px;
+  }
+
+  .estrella {
+    font-size: 14px;
+  }
+
+  .btn-like, .btn-dislike, .btn-suscripcion, .btn-eliminar {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+
+  .reacciones {
+    gap: 4px;
+  }
+
+  .imgRespuesta {
+    width: 120px;
+    height: 120px;
+  }
+}

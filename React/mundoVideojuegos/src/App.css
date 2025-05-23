@@ -2,7 +2,7 @@
 
 /*CONTENIDO DE JUEGOS*/
 .contenedor-juegos {
-    padding-top: 120px; /* espacio para que no tape el menú */
+    padding-top: 60px; /* espacio para que no tape el menú */
   }
   
   .menu-fijo {
@@ -39,7 +39,7 @@
   grid-row: 2;
 }
 .contenido-principal-publicar {
-  padding-top: 200px; /* igual que la altura del menú */
+  padding-top: 100px; /* igual que la altura del menú */
   overflow-y: auto;
   padding-bottom: 80px;
   grid-row: 2;
@@ -52,14 +52,19 @@
   grid-row: 2;
 }
 .contenido-principal-perfil {
-  padding-top: 150px; /* igual que la altura del menú */
+  padding-top: 90px; /* igual que la altura del menú */
   overflow-y: auto;
   padding-bottom: 80px;
   grid-row: 2;
 }
-
+.contenido-principal-eleccion  {
+  padding-top: 40px; /* igual que la altura del menú */
+  overflow-y: auto;
+  padding-bottom: 80px;
+  grid-row: 2;
+}
 .contenido-principal-detalleJuego {
-  padding-top: 170px; /* igual que la altura del menú */
+  padding-top: 65px; /* igual que la altura del menú */
   overflow-y: auto;
   padding-bottom: 80px;
   grid-row: 2;

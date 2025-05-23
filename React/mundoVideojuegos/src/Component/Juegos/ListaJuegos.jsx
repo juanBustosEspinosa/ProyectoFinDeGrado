@@ -5,7 +5,7 @@ import './ListaJuegos.css';
 function ListaJuegos({ juegos }) {
   const navigate = useNavigate();
   const [paginaActual, setPaginaActual] = useState(1);
-  const juegosPorPagina = 10;
+  const juegosPorPagina = 12;
 
   const totalPaginas = Math.ceil(juegos.length / juegosPorPagina);
 

@@ -1,5 +1,7 @@
 package org.example.poryectofinal.MundoVideojuegos.Repositorio;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Juego;
@@ -26,5 +28,9 @@ public interface RepositorioUsuario extends JpaRepository<Usuario,Integer> {
     List<Usuario> buscarPorNickname(String nickname);
     @Query("SELECT u FROM Usuario u WHERE FUNCTION('MONTH', u.fechaInicio) = :mes AND FUNCTION('YEAR', u.fechaInicio) = :anio")
     List<Usuario> buscarUsuariosDelMes(@Param("mes") int mes, @Param("anio") int anio);
+
+    boolean existsByCorreo(@Size(max = 255) @NotNull String correo);
+
+    boolean existsByTelefono(@NotNull @Min(value = 100000000, message = "El teléfono debe tener 9 dígitos") @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos") Integer telefono);
 }
 

@@ -40,6 +40,10 @@
     font-size: 16px;
     margin: 4px 0;
   }
+  .usuario-nickname:hover {
+      color: #00bfff;
+
+  }
   
   .usuario-fecha {
     font-size: 14px;
@@ -65,3 +69,50 @@
     background-color: #3498db;
     color: white;
   }
+  /* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .usuario-card {
+    width: 140px;
+    padding: 12px;
+  }
+
+  .perfil-usuario {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+
+  .usuario-nickname {
+    font-size: 14px;
+  }
+
+  .usuario-fecha {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .usuarios-container {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .usuario-card {
+    width: 100%;
+    max-width: 280px;
+    padding: 15px;
+  }
+
+  .perfil-usuario {
+    width: 70px;
+    height: 70px;
+  }
+
+  .usuario-nickname {
+    font-size: 16px;
+  }
+
+  .usuario-fecha {
+    font-size: 13px;
+  }
+}

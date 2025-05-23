@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "./CompoenetCrearJuego.css"
 
 function ComponentCrearJuego() {
   const navigate = useNavigate();
@@ -83,78 +84,89 @@ const handleFileChange = (e) => {
   }
 };
   return (
-    <form onSubmit={handleCrearJuego}>
-      <h2>Crear Juego</h2>
+<form onSubmit={handleCrearJuego} className="formulario-juego">
+  <h2 className="titulo-formulario">Crear Juego</h2>
 
-      <div>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Nombre:</label>
+    <input
+      type="text"
+      value={nombre}
+      onChange={(e) => setNombre(e.target.value)}
+      required
+      className="input-text"
+    />
+  </div>
 
-      <div>
-        <label>Descripción:</label>
-        <textarea
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          required
-        />
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Descripción:</label>
+    <textarea
+      value={descripcion}
+      onChange={(e) => setDescripcion(e.target.value)}
+      required
+      className="textarea-texto"
+    />
+  </div>
 
-      <div>
-        <label>Fecha de Lanzamiento:</label>
-        <input
-          type="date"
-          value={fechaLanzamiento}
-          onChange={(e) => setFechaLanzamiento(e.target.value)}
-          required
-        />
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Fecha de Lanzamiento:</label>
+    <input
+      type="date"
+      value={fechaLanzamiento}
+      onChange={(e) => setFechaLanzamiento(e.target.value)}
+      required
+      className="input-text"
+    />
+  </div>
 
-      <div>
-        <label>Género 1:</label>
-        <input
-          type="text"
-          value={genero1}
-          onChange={(e) => setGenero1(e.target.value)}
-          required
-        />
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Género 1:</label>
+    <input
+      type="text"
+      value={genero1}
+      onChange={(e) => setGenero1(e.target.value)}
+      required
+      className="input-text"
+    />
+  </div>
 
-      <div>
-        <label>Género 2 (opcional):</label>
-        <input
-          type="text"
-          value={genero2}
-          onChange={(e) => setGenero2(e.target.value)}
-        />
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Género 2 (opcional):</label>
+    <input
+      type="text"
+      value={genero2}
+      onChange={(e) => setGenero2(e.target.value)}
+      className="input-text"
+    />
+  </div>
 
-      <div>
-        <label>Tipo</label>
-        <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-            <option value="">Selecciona una opción</option>
-            <option value="singleplayer">singleplayer</option>
-            <option value="multiplayer">multiplayer</option>
-            <option value="single/multiplayer">single/multiplayer</option>
-        </select>
-      </div>
+  <div className="grupo-campo">
+    <label className="label">Tipo:</label>
+    <select
+      value={tipo}
+      onChange={(e) => setTipo(e.target.value)}
+      className="select-tipo"
+    >
+      <option value="singleplayer">singleplayer</option>
+      <option value="multiplayer">multiplayer</option>
+      <option value="single/multiplayer">single/multiplayer</option>
+    </select>
+  </div>
 
+  <div className="grupo-campo">
     <input
       type="file"
       accept="image/*"
       className="input-imagen"
       onChange={handleFileChange}
     />
+  </div>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+  {error && <p className="error-text">{error}</p>}
 
-      <button type="submit">Crear Juego</button>
-    </form>
+  <button type="submit" className="btn-submit">Crear Juego</button>
+</form>
+
   );
 }
 

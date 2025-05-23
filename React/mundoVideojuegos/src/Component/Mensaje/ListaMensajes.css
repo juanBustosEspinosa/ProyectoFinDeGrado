@@ -213,3 +213,81 @@
 .usuarioPerfil:hover {
   color: #00bfff;
 }
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+  .mensaje {
+    padding: 15px 18px;
+    font-size: 14px;
+  }
+
+  .nicknameUsuario {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .contenidoMensaje {
+    font-size: 14px;
+  }
+
+  .puntuacion {
+    font-size: 16px;
+  }
+
+  .estrella {
+    font-size: 18px;
+  }
+
+  .btn-ver-respuestas,
+  .btn-responder,
+  .btn-suscribirse,
+  .btn-eliminar,
+  .btn-like,
+  .btn-dislike {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .reacciones {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mensaje {
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+
+  .nicknameUsuario {
+    font-size: 14px;
+  }
+
+  .contenidoMensaje {
+    font-size: 13px;
+  }
+
+  .puntuacion {
+    font-size: 14px;
+  }
+
+  .estrella {
+    font-size: 16px;
+  }
+
+  .btn-ver-respuestas,
+  .btn-responder,
+  .btn-suscribirse,
+  .btn-eliminar,
+  .btn-like,
+  .btn-dislike {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .reacciones {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}
