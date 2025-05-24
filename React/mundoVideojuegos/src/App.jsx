@@ -19,6 +19,7 @@ import ComponentJuegoDetallado from './Component/Juegos/DetallesJuego/ComponentJ
 import ComponentPerfil from './Component/Mensaje/Perfil/ComponentPerfil';
 import ComponentCrearJuego from './Component/Juegos/CrearJuego/CompoenetCrearJuego';
 import ComponentFooter from './Component/Footer/ComponentFooter';
+import PublicacionMensajeJuego from './Component/Mensaje/PublicarMensajeEmpresaJuego/PublicacionMensajeJuego'
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext); // Obtener el estado de autenticación desde el contexto
@@ -133,6 +134,20 @@ function App() {
             </div>
           <div className="contenido-principal-eleccion">
           <BusquedaSeleccionCompoenet /> 
+          </div>   
+          <div className='footer'>
+              <ComponentFooter />
+          </div>  </div>: <Navigate to="/login"/>}
+        />
+
+        <Route
+        path="/PublicarMensajeInformatico"
+        element={isAuthenticated ? <div className="pagina-contenedor">
+            <div className="menu-fijo">
+              <ComponentMenu />
+            </div>
+          <div className="contenido-principal-eleccion">
+          <PublicacionMensajeJuego/> 
           </div>   
           <div className='footer'>
               <ComponentFooter />

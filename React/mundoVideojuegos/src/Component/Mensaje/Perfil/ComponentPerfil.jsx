@@ -9,10 +9,6 @@ import ComponentJuego from '../../Juegos/ComponentJuego';
 
 
 function ComponentPerfil(){
-//Hay que modificar ComponentMensaje para que solo salgan sus mensajes 
-//Hay que hacer las consulta en spring boot 
-//hay que hacer dos consultar en spring boot una para saber los que siguen al usuario y otra para saber a los que le siguen
-//Hay que hacer dos peticiones para saber los seguidos y los que le siguen
 
 const usuarioLocal = JSON.parse(localStorage.getItem("usuario"));
 const [totalseguidores, setSeguidores] = useState("");
@@ -63,6 +59,9 @@ const navigate = useNavigate();
     navigate('/CrearJuego');
   }
 
+    const handleInformacionJuego = () => { //adadas
+    navigate('/PublicarMensajeInformatico');
+  }
 
 console.log(totalseguidor);
 console.log(usuario);
@@ -106,6 +105,10 @@ console.log(usuario);
   )}
   {usuario.id === usuarioLocal.id && usuarioLocal.tipo === "empresa" && (
   <button className='btn-crearjuego-perfil' onClick={handleCrearJuego}>Crear juego</button>
+  
+)}
+  {usuario.id === usuarioLocal.id && usuarioLocal.tipo === "empresa" && (
+  <button className='btn-crearjuego-perfil' onClick={handleInformacionJuego}>Publicacion Informativa</button>
   
 )}
 </div>
