@@ -31,9 +31,9 @@ function ComponentRegistro(){
     nombre: nombre,
     imagen: imagen
   };
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); //Para manejar los errores
 const gotoLogin = () => {
-          navigate("/login");
+          navigate("/login"); //te redirige al login
 }
 
 const handleFileChange = (e) => {
@@ -52,7 +52,7 @@ const handleFileChange = (e) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-            if (telefono < 100000000 || telefono > 999999999) {
+            if (telefono < 100000000 || telefono > 999999999) { //volvemos a comprobar que este bien el telefono
               alert("Pon bien tu numero de telefono");
               return;
             }
@@ -64,8 +64,7 @@ const handleFileChange = (e) => {
           // Si el backend devuelve el usuario, inicia sesión y redirige
           if (response.status === 200) {
 
-            // login(); // Marca al usuario como autenticado en el contexto
-          navigate("/login"); // Redirige a la página principal
+          navigate("/login"); // Redirige a la página del login
           }
         } catch (error) {
           console.error("Error al Registrarse:", error);
@@ -83,6 +82,8 @@ const handleFileChange = (e) => {
     return (
 <div className="registro-container"> 
 <h1 className="registro-titulo">Registro</h1>
+
+      {/** NICKNAME */}
   <form className="registro-form" onSubmit={handleLogin}>
     <div className="registro-input-group">
       <label className="registro-label">Nickname</label>
@@ -96,6 +97,7 @@ const handleFileChange = (e) => {
       />
     </div>
 
+      {/** PASSWORD */}
     <div className="registro-input-group">
       <label className="registro-label">Contraseña</label>
       <input
@@ -108,6 +110,7 @@ const handleFileChange = (e) => {
       />
     </div>
 
+      {/** TELEFONO */}
     <div className="registro-input-group">
       <label className="registro-label">Teléfono</label>
       <input
@@ -120,6 +123,7 @@ const handleFileChange = (e) => {
       />
     </div>
 
+      {/** TIPO */}
     <div className="registro-input-group">
       <label className="registro-label">Tipo</label>
       <select
@@ -132,6 +136,7 @@ const handleFileChange = (e) => {
       </select>
     </div>
 
+      {/** EMAIL */}
     <div className="registro-input-group">
       <label className="registro-label">Correo</label>
       <input
@@ -142,8 +147,9 @@ const handleFileChange = (e) => {
         placeholder="Ingresa tu correo"
         required
       />
-    </div>
+    </div>     
 
+     {/** NOMBRE */}
     <div className="registro-input-group">
       <label className="registro-label">Nombre</label>
       <input
@@ -156,6 +162,7 @@ const handleFileChange = (e) => {
       />
     </div>
 
+      {/** APELLIDO */}
     <div className="registro-input-group">
       <label className="registro-label">Apellido</label>
       <input
@@ -167,6 +174,7 @@ const handleFileChange = (e) => {
       />
     </div>
 
+      {/** IMAGEN */}
     <div className="registro-input-group">
       <label className="registro-label">Foto de perfil</label>
       <input
@@ -177,9 +185,12 @@ const handleFileChange = (e) => {
       />
     </div>
 
+        {/** BOTONES */}
     <button className="registro-button" type="submit">Registrar</button>
     <button className="registro-button secondary" type="button" onClick={gotoLogin}>Volver Login</button>
   </form>
+
+      {/** MOSTRAR ERRORRES */}
 
   {error && <p className="registro-error">{error}</p>}
 </div>

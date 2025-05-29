@@ -8,13 +8,15 @@ function ComponentLectura(){
     const [nombre,setNombre] = useState('');
     const navigate = useNavigate();
 
-
+    //Cuando nos pasen un nombre se lo enviamos
     const handleClick = () => {
         navigate(`/BusquedaJuego?nombre=${nombre}`);
     }
 
     return (
         <div className="busqueda-container">
+
+                {/** NOMBRE */}
             <input
                 type="text"
                 className="input-Busqueda"

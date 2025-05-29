@@ -40,16 +40,18 @@ const handleFileChange = (e) => {
 
   const handlePublicar = async (e) => {
     e.preventDefault();
+    //SE OBLIGA A SELECCIONAR UN JUEGO PARA HACER UN PUBLICACION
     if (!juego) {
       alert("Selecciona un juego antes de publicar");
       return;
     }
 
+    //HAY QUE PONER UNA PUNTUACION
     if (!puntuacion) {
       alert("No hay puntuacion");
       return;
     }
-
+    //EN CASO DE QUE EL USUARIO NO QUIERA UNA DESCRIPCION SOLO PUNTUAR EL JUEGO PONDRA NO HAY MENSAJE
     if (!descripcion || descripcion.trim() === ''){
       setDescripcion("No hay mensaje");
     }
@@ -69,7 +71,7 @@ const handleFileChange = (e) => {
 
 
     try {
-      const response = await axios.post("http://localhost:8091/Mensaje", mensajeData);
+      const response = await axios.post("http://localhost:8091/Mensaje", mensajeData); //Hacemos el Post a la API
       console.log('Respuesta de la API:', response.data);
 
       // Aquí puedes manejar la respuesta, por ejemplo:
@@ -87,6 +89,7 @@ const handleFileChange = (e) => {
     }
   };
 
+  //Aqui se envia al usuario para poder elegir el juego
   const handleClick = () => {
     navigate(`/EleccionJuego?nombre=${nombre}`);
   };
@@ -94,6 +97,8 @@ const handleFileChange = (e) => {
   return (
 <div className="form-container">
   <h1 className='publicar-titulo'>Publicar Mensaje</h1>
+       
+        {/** NOMBRE DEL JUEGO */}
   <input
     type="text"
     className="input-nombre"
@@ -101,8 +106,10 @@ const handleFileChange = (e) => {
     onChange={(e) => setNombre(e.target.value)}
     placeholder="Escribe el nombre del juego"
   />
+        {/** BOTON PARA PODER SELECIONAR EL JUEGO */}
   <button type="button" className="btn-buscar" onClick={handleClick}>Buscar Juego</button>
 
+      {/** PUNTUACION */}
   <form onSubmit={handlePublicar} className="form-publicar">
     <input
       type="range"
@@ -115,6 +122,7 @@ const handleFileChange = (e) => {
     />
     <span className="puntuacion-display">{puntuacion}</span>
 
+      {/** DESCRIPCION */}
     <textarea
       className="input-descripcion"
       value={descripcion}
@@ -122,6 +130,7 @@ const handleFileChange = (e) => {
       placeholder="Descripción"
     ></textarea>
 
+      {/** IMAGEN */}
     <input
       type="file"
       accept="image/*"
@@ -129,9 +138,10 @@ const handleFileChange = (e) => {
       onChange={handleFileChange}
     />
 
-    {/* Mostrar el error si el archivo es demasiado grande */}
+    {/* MOSTRAR ERROR */}
     {error && <p className="error-message">{error}</p>}
-
+    
+    {/** BOTON DE PUBLICAR */}
     <button type="submit" className="btn-publicar">Publicar Mensaje</button>
   </form>
 </div>

@@ -16,23 +16,24 @@ function ComponentMensaje({idjuego,idUsuario,mes}){
               let ramdom = false;
                 //Vamos a hacer una peticion a las Base de datos para sacar los mensajes
                 if (idjuego === null && idUsuario === null && !mes){
-                  response = await axios.get("http://localhost:8091/Mensaje");
+                  response = await axios.get("http://localhost:8091/Mensaje"); //COGERMOS TODOS LOS MENSAJES
                   ramdom = true;
 
                 } else if(idjuego != null){
                   response = await axios.get("http://localhost:8091/Mensaje/Juego",
                     {params: {id: idjuego}}
-                  );
+                  ); //COGEMOS TODOS LOS MENSAJES DE UN JUEGO
                 } else if (mes){
-                  response = await axios.get("http://localhost:8091/Mensaje/MensajeMes");
+                  response = await axios.get("http://localhost:8091/Mensaje/MensajeMes");//COGEMOS TODOS LOSMMENSAJES DEL MES
                   ramdom = true;
 
                 }else {
                     response = await axios.get("http://localhost:8091/Mensaje/Usuario",
                     {params: {id: idUsuario}}
-                  );
+                  ); //COGEMOS TODOS LOS MENSAJES DE UN USUARIO
                 }
                 const mensajeData = response.data;
+                //HACEMOS QUE LOS MENSAJES SEAN ALEATORIOS PARA QUE NO SE HAGAN REPETITIVOS
                 if (ramdom){
                   const mezclados = [...mensajeData].sort(() => Math.random() - 0.5);
                   setMensajes(mezclados)
@@ -53,6 +54,7 @@ function ComponentMensaje({idjuego,idUsuario,mes}){
 
     return (
         <div>
+            {/** SI NO HAY MENSAJES SE MOSTRARA NO HAY MENSAJES EN CASO CONTRARIO SE MOSTRARAN LOS MENSAJES */}
         {mensajes.length === 0 ? (
           <p>No hay mensajes para mostrar</p>
         ) : (

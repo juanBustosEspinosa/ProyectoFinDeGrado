@@ -11,7 +11,6 @@
   box-sizing: border-box;
 }
 
-/* Asegura que el texto no se desborde */
 .footer-autor {
   margin: 0;
   font-size: 14px;
@@ -19,7 +18,7 @@
   word-break: break-word;
 }
 
-/* Responsividad específica */
+/* Responsividad */
 @media (max-width: 600px) {
   .contenedor-Footer {
     font-size: 13px;

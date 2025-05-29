@@ -35,11 +35,11 @@ function BusquedaSeleccionCompoenet() {
         if (!empresa){
          resposive= await axios.get('http://localhost:8091/Juego/BuscarJuegos', {
           params: { nombre: nombre }
-        }); 
+        }); //Hacemos una busqueda por nombre por ejemplo si pones una n te buscara todos los juego que contengas una n
         }else if (empresa) {
           resposive = await axios.get('http://localhost:8091/Juego/BuscarJuegosUsuario',
             {params: {id: usuario.id}}
-          )
+          ) //Buscamos los juegos de un usuario 
         }
         
         setJuegos(resposive.data);
@@ -66,7 +66,7 @@ function BusquedaSeleccionCompoenet() {
 
   const handleVolver = () => {
         if (!empresa){
-    navigate('/publicacion');
+    navigate('/publicacion'); 
     } else if (empresa) {
       navigate('/PublicarMensajeInformatico');
 
@@ -92,6 +92,8 @@ function BusquedaSeleccionCompoenet() {
         </div>
         ))}
       </div>
+
+          {/** PAGINACION */}
       <div className="paginacion">
         {Array.from({ length: totalPaginas }, (_, i) => (
           <button
@@ -103,6 +105,8 @@ function BusquedaSeleccionCompoenet() {
           </button>
         ))}
 
+
+        {/** BOTON */}
         <button className='' onClick={handleVolver}>volver</button>
       </div>
     </div>

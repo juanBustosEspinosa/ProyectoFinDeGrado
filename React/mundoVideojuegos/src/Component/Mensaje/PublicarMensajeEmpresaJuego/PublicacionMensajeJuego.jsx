@@ -90,6 +90,8 @@ const handleFileChange = (e) => {
   return (
 <div className="form-container">
   <h1 className='publicar-titulo'>Publicar Mensaje</h1>
+
+        {/** NOMBRE DEL JUEGO */}
   <input
     type="text"
     className="input-nombre"
@@ -97,9 +99,12 @@ const handleFileChange = (e) => {
     onChange={(e) => setNombre(e.target.value)}
     placeholder="nombre del juego"
   />
+
+          {/** BOTON PARA ELEGIR EL JUEGO */}
   <button type="button" className="btn-buscar" onClick={handleClick}>Buscar Juego</button>
 
   <form onSubmit={handlePublicar} className="form-publicar">
+      {/** PUNTUACION */}
     <input
       type="range"
       min="0"
@@ -110,7 +115,8 @@ const handleFileChange = (e) => {
       className="input-puntuacion"
     />
     <span className="puntuacion-display">{puntuacion}</span>
-
+      
+      {/** TIPO */}
     <div className="registro-input-group">
       <label className="registro-label">Tipo</label>
       <select
@@ -123,13 +129,14 @@ const handleFileChange = (e) => {
       </select>
     </div>
 
+      {/** DESCRIPCION */}
     <textarea
       className="input-descripcion"
       value={descripcion}
       onChange={(e) => setDescripcion(e.target.value)}
       placeholder="Descripción"
     ></textarea>
-
+      {/** IMAGEN */}
     <input
       type="file"
       accept="image/*"
@@ -137,9 +144,10 @@ const handleFileChange = (e) => {
       onChange={handleFileChange}
     />
 
-    {/* Mostrar el error si el archivo es demasiado grande */}
+    {/* MOSTRAR ERROR*/}
     {error && <p className="error-message">{error}</p>}
-
+      
+      {/** BOTON PARA PUBLICAR MENSAJE */}
     <button type="submit" className="btn-publicar">Publicar Mensaje</button>
   </form>
 </div>

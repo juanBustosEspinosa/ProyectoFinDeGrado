@@ -48,6 +48,8 @@ function ComponentLogin() {
 <div className="login-container">
   <h1 className="login-titulo">Login</h1>
   <form onSubmit={handleLogin} className="login-form">
+
+          {/** NICKNAME */}
     <div className="login-input-group">
       <label className="login-label">Usuario</label>
       <input
@@ -58,6 +60,8 @@ function ComponentLogin() {
         className="login-input"
       />
     </div>
+      
+      {/** PASSWORD */}
     <div className="login-input-group">
       <label className="login-label">Contraseña</label>
       <input
@@ -68,10 +72,13 @@ function ComponentLogin() {
         className="login-input"
       />
     </div>
+              
+        {/** BOTONES */}
     <button type="submit" className="login-button">Iniciar sesión</button>
     <button type="button" onClick={goToRegister} className="login-button secondary">Registro</button>
   </form>
 
+        {/** MOSTRAR ERRORES */}
   {error && <p className="login-error">{error}</p>}
 </div>
   );

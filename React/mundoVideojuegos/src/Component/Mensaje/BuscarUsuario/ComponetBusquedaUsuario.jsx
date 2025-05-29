@@ -14,6 +14,8 @@ function ComponetBusquedaUsuario(){
 
     return (
         <div className="busqueda-container">
+
+                    {/** NICKNAME */}
             <input
                 type="text"
                 className="input-Busqueda"

@@ -23,27 +23,31 @@ function ComponentCrearJuego() {
   const handleCrearJuego = async (e) => {
     e.preventDefault();
 
+      {/** COMPROBAMOS QUE HAYA PUESTO UNA FECHA*/}
     if (!fechaLanzamiento) {
       alert("Pon la Fecha de lanzamiento");
       return;
     }
 
+        {/** COMPROBAMOS DE QUE HAYA UN GENERO*/}
     if (!genero1) {
       alert("No hay genero");
       return;
     }
 
-    
+        {/**COMPROBAMOS QUE HAYA UN NOMBRE */}
     if (!nombre) {
       alert("No hay nombre del juego");
       return;
     }
+      
+    {/** COMPROBAMOS QUE HAYA UN TIPO */}
     if (!tipo || tipo.trim() === ''){
         alert("no hay un tipo")
         return
     }
 
-
+        {/** SI NO HAY UNA DESCRIPCION SE PONDRA QUE NO HAY MENSAJE */}
     if (!descripcion || descripcion.trim() === ''){
       setDescripcion("No hay mensaje");
     }
@@ -57,13 +61,13 @@ function ComponentCrearJuego() {
       idDesarrollador: usuario,
       imagen: imagen,
       nombre: nombre,
-      tipo: tipo, //hay que definirlo
+      tipo: tipo, 
     };
 
     try {
-      const response = await axios.post('http://localhost:8091/Juego', juegoData);
+      const response = await axios.post('http://localhost:8091/Juego', juegoData);// Envia el juego para que se guarde
       if (response.status === 200 && response.data) {
-      navigate('/juegos');
+      navigate('/juegos'); 
       }
     } catch (err) {
       setError('Error al crear el juego.');
@@ -87,6 +91,7 @@ const handleFileChange = (e) => {
 <form onSubmit={handleCrearJuego} className="formulario-juego">
   <h2 className="titulo-formulario">Crear Juego</h2>
 
+        {/** NOMBRE */}
   <div className="grupo-campo">
     <label className="label">Nombre:</label>
     <input
@@ -98,6 +103,7 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/** DESCRIPCION */}
   <div className="grupo-campo">
     <label className="label">Descripción:</label>
     <textarea
@@ -108,6 +114,7 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/** FECHA LANZAMIENTO */}
   <div className="grupo-campo">
     <label className="label">Fecha de Lanzamiento:</label>
     <input
@@ -119,6 +126,7 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/** GENERO1*/}
   <div className="grupo-campo">
     <label className="label">Género 1:</label>
     <input
@@ -130,6 +138,7 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/**GENERO2 */}
   <div className="grupo-campo">
     <label className="label">Género 2 (opcional):</label>
     <input
@@ -140,6 +149,7 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/** TIPO */}
   <div className="grupo-campo">
     <label className="label">Tipo:</label>
     <select
@@ -153,6 +163,7 @@ const handleFileChange = (e) => {
     </select>
   </div>
 
+        {/** IMAGEN */}
   <div className="grupo-campo">
     <input
       type="file"
@@ -162,8 +173,10 @@ const handleFileChange = (e) => {
     />
   </div>
 
+        {/** MOSTRAR ERRORES */}
   {error && <p className="error-text">{error}</p>}
 
+        {/** BOTON */}
   <button type="submit" className="btn-submit">Crear Juego</button>
 </form>
 

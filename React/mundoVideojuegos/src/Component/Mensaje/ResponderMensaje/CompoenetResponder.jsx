@@ -41,11 +41,12 @@ const handleFileChange = (e) => {
   const handlePublicar = async (e) => {
     e.preventDefault();
 
+      // TIENE QUE HABER UNA PUNTUACION 
     if (!puntuacion) {
       alert("No hay puntuacion");
       return;
     }
-
+    //TIENE QUE HABER UNA DESCRIPCION
     if (!descripcion || descripcion.trim() === ''){
       setDescripcion("No hay mensaje");
     }
@@ -66,7 +67,7 @@ const handleFileChange = (e) => {
 
     try {
       console.log('Mensaje a enviar:', mensajeData);
-      const response = await axios.post("http://localhost:8091/MensajeRespuesta", mensajeData);
+      const response = await axios.post("http://localhost:8091/MensajeRespuesta", mensajeData); //SE HACCE UN POST DE LA RESPUESTA
 
       console.log('Respuesta de la API:', response.data);
 
@@ -91,6 +92,7 @@ const handleFileChange = (e) => {
   <h1 className='publicar-titulo'>Publicar Respuesta</h1>
 
   <form onSubmit={handlePublicar} className="form-publicar">
+      {/** PUNTUACION */}
     <input
       type="range"
       min="0"
@@ -102,6 +104,7 @@ const handleFileChange = (e) => {
     />
     <span className="puntuacion-display">{puntuacion}</span>
 
+  {/** DESCRIPCION */}
     <textarea
       className="input-descripcion"
       value={descripcion}
@@ -109,6 +112,7 @@ const handleFileChange = (e) => {
       placeholder="Descripción"
     ></textarea>
 
+  {/** IMAGEN */}
     <input
       type="file"
       accept="image/*"
@@ -116,9 +120,10 @@ const handleFileChange = (e) => {
       onChange={handleFileChange}
     />
 
-    {/* Mostrar el error si el archivo es demasiado grande */}
+    {/* MOSTRAR ERROR */}
     {error && <p className="error-message">{error}</p>}
 
+  {/** BOTON DE PUBLICAR RESPUESTA */}
     <button type="submit" className="btn-publicar">Publicar Mensaje</button>
   </form>
 </div>
