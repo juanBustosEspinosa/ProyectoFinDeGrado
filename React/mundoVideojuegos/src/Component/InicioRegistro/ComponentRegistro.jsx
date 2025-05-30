@@ -10,7 +10,7 @@ function ComponentRegistro(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [telefono, setTelefono] = useState('');
-  const [tipo, setTipo] = useState('');
+  const [tipo, setTipo] = useState('usuario');
   const [correo, setCorreo] = useState('');
   const [apellido, setApellido] = useState('');
   const [nombre, setNombre] = useState('');
