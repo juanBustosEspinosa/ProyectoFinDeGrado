@@ -26,6 +26,7 @@ public interface RepositorioUsuario extends JpaRepository<Usuario,Integer> {
 
     @Query("SELECT u FROM Usuario u WHERE LOWER(u.nickname) LIKE LOWER(CONCAT('%', :nickname, '%'))")
     List<Usuario> buscarPorNickname(String nickname);
+
     @Query("SELECT u FROM Usuario u WHERE FUNCTION('MONTH', u.fechaInicio) = :mes AND FUNCTION('YEAR', u.fechaInicio) = :anio")
     List<Usuario> buscarUsuariosDelMes(@Param("mes") int mes, @Param("anio") int anio);
 

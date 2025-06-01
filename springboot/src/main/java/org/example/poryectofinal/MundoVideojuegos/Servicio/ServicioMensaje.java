@@ -49,7 +49,7 @@ public class ServicioMensaje {
     @Transactional
     public String save(Mensaje mensaje){
         if (repositorioMensaje.existsByid(mensaje.getId())){
-            return "El nombre del Mensaje ya existe";
+            return "El id del Mensaje ya existe";
         }else {
             repositorioMensaje.save(mensaje);
             return "Se ha creado el Mensaje";

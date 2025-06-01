@@ -18,7 +18,8 @@ public class Usuario {
 
     @NotNull
     @Min(value = 100000000, message = "El teléfono debe tener 9 dígitos")
-    @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos")    @Column(name = "telefono", nullable = false)
+    @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos")
+    @Column(name = "telefono", nullable = false)
     private Integer telefono;
 
     @Size(max = 255)
@@ -43,7 +44,7 @@ public class Usuario {
     @PrePersist
     public void prePersist() {
         if (this.fechaInicio == null) {
-            this.fechaInicio = LocalDateTime.now();  // Asigna la fecha y hora actuales
+            this.fechaInicio = LocalDateTime.now();
         }
     }
 

@@ -22,13 +22,16 @@ function ListaMensajes({ mensajes,setMensajes}) {
 useEffect(() => {
   const obtenerSuscripciones = async () => {
     try {
-      const response = await axios.get('http://localhost:8091/Seguir', {
+      setSuscripciones([]);
+
+      const response = await axios.get('http://localhost:8091/Seguir/reaccion', {
         params: { idUsuario: usuario.id }
       });
 
       // Accede correctamente a los usuarios seguidos 
-      const datos = response.data; 
-      
+      const datos = Array.isArray(response.data) ? response.data : [];
+      console.log("prueba" +datos)
+
       // Extrae los IDs de los usuarios seguidos
       const idsSeguidos = datos.map(u => u.idSeguido.id);
       setSuscripciones(idsSeguidos);
@@ -277,6 +280,9 @@ const irAlPerfil = (usuario) => {
                 <strong className='tituloJuego'>Reseña de {mensaje.idJuego.nombre}</strong>
               </div>
               <p className='contenidoMensaje'>{mensaje.descripcion}</p>
+            {mensaje.imagen != null &&(
+            <img className='imgRespuesta' src={`data:image/jpeg;base64,${mensaje.imagen}`} alt="" />
+            )}
                 {/** ESTRELLAS */}
               <p className='puntuacion'>
                 {[...Array(5)].map((_, i) => {

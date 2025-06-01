@@ -7,11 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RepositorioSeguir  extends JpaRepository<Seguir,Integer> {
     boolean existsByid(Integer id);
 
-    Seguir getSeguirById(Integer id);
+    List<Seguir> getSeguirById(Integer id);
     @Query("SELECT s FROM Seguir s WHERE s.idSeguidor.id = :idSeguidor AND s.idSeguido.id = :idSeguido")
     Seguir findByIds(@Param("idSeguidor") Integer idSeguidor, @Param("idSeguido") Integer idSeguido);
 
@@ -20,6 +22,10 @@ public interface RepositorioSeguir  extends JpaRepository<Seguir,Integer> {
     Integer countByIdSeguidor_Id(Integer id);
 
     Integer countByIdSeguido_Id(Integer id);
+
+    boolean existsByIdSeguidor_Id(Integer idSeguidorId);
+
+    List<Seguir> findByIdSeguidor_Id(Integer id);
 
     // Seguir getSeguirByIdSeguidorAndIdSeguido_Id(Integer id, Integer id1);
 }

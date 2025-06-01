@@ -20,9 +20,9 @@ public class ControladorSeguir {
     public ResponseEntity<List<Seguir>> getAll(){
         return ResponseEntity.ok(servicioSeguir.getAll());
     }
-    @GetMapping("{id}")
-    public ResponseEntity<Seguir> getById(@PathVariable int id){
-        return ResponseEntity.ok(servicioSeguir.getById(id));
+    @GetMapping("/reaccion")
+    public ResponseEntity<List<Seguir>> getById(@RequestParam int idUsuario){
+        return ResponseEntity.ok(servicioSeguir.getById(idUsuario));
     }
     @GetMapping("/seguidor")
     public ResponseEntity<Integer> getSeguidor(@RequestParam Integer idSeguidor){
