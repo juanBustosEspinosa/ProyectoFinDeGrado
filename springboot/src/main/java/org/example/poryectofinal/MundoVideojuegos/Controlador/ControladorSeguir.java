@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/Seguir")
 public class ControladorSeguir {
@@ -19,10 +20,20 @@ public class ControladorSeguir {
     public ResponseEntity<List<Seguir>> getAll(){
         return ResponseEntity.ok(servicioSeguir.getAll());
     }
-    @GetMapping("{id}")
-    public ResponseEntity<Seguir> getById(@PathVariable int id){
-        return ResponseEntity.ok(servicioSeguir.getById(id));
+    @GetMapping("/reaccion")
+    public ResponseEntity<List<Seguir>> getById(@RequestParam int idUsuario){
+        return ResponseEntity.ok(servicioSeguir.getById(idUsuario));
     }
+    @GetMapping("/seguidor")
+    public ResponseEntity<Integer> getSeguidor(@RequestParam Integer idSeguidor){
+        return ResponseEntity.ok(servicioSeguir.countSeguidor(idSeguidor));
+    }
+    @GetMapping("/seguido")
+    public ResponseEntity<Integer> getSeguido(@RequestParam Integer idSeguido){
+        return ResponseEntity.ok(servicioSeguir.countSeguido(idSeguido));
+    }
+
+
 
     @PostMapping
     public ResponseEntity<String> add(@Valid @RequestBody Seguir seguir){
@@ -37,5 +48,9 @@ public class ControladorSeguir {
     @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable int id){
         return ResponseEntity.ok(servicioSeguir.delete(id));
+    }
+    @DeleteMapping
+    public ResponseEntity<String> deleteSeguir(@RequestBody Seguir seguir){
+        return ResponseEntity.ok(servicioSeguir.deleteSeguir(seguir));
     }
 }

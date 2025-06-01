@@ -24,28 +24,29 @@ function ComponentResponder() {
     }
   }, [juego]);*/
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
 
-    if (file) {
-      if (file.size > MAX_SIZE_BYTES) {
-        setError(`El archivo es demasiado grande. El tamaño máximo permitido es ${MAX_SIZE_MB} MB.`);
-        setImagen(null);  // Limpiar el archivo si es muy grande
-      } else {
-        setError(null);  // Limpiar el error si el archivo es válido
-        setImagen(file);  // Guardar el archivo en el estado si es válido
-      }
-    }
+  reader.onloadend = () => {
+    const base64String = reader.result.split(',')[1]; // solo base64
+    setImagen(base64String); // esto es lo que espera el backend
   };
+
+  if (file) {
+    reader.readAsDataURL(file); // importante usar .readAsDataURL
+  }
+};
 
   const handlePublicar = async (e) => {
     e.preventDefault();
 
+      // TIENE QUE HABER UNA PUNTUACION 
     if (!puntuacion) {
       alert("No hay puntuacion");
       return;
     }
-
+    //TIENE QUE HABER UNA DESCRIPCION
     if (!descripcion || descripcion.trim() === ''){
       setDescripcion("No hay mensaje");
     }
@@ -66,7 +67,7 @@ function ComponentResponder() {
 
     try {
       console.log('Mensaje a enviar:', mensajeData);
-      const response = await axios.post("http://localhost:8091/MensajeRespuesta", mensajeData);
+      const response = await axios.post("http://localhost:8091/MensajeRespuesta", mensajeData); //SE HACCE UN POST DE LA RESPUESTA
 
       console.log('Respuesta de la API:', response.data);
 
@@ -88,8 +89,10 @@ function ComponentResponder() {
 
   return (
 <div className="form-container">
+  <h1 className='publicar-titulo'>Publicar Respuesta</h1>
 
   <form onSubmit={handlePublicar} className="form-publicar">
+      {/** PUNTUACION */}
     <input
       type="range"
       min="0"
@@ -101,6 +104,7 @@ function ComponentResponder() {
     />
     <span className="puntuacion-display">{puntuacion}</span>
 
+  {/** DESCRIPCION */}
     <textarea
       className="input-descripcion"
       value={descripcion}
@@ -108,6 +112,7 @@ function ComponentResponder() {
       placeholder="Descripción"
     ></textarea>
 
+  {/** IMAGEN */}
     <input
       type="file"
       accept="image/*"
@@ -115,9 +120,10 @@ function ComponentResponder() {
       onChange={handleFileChange}
     />
 
-    {/* Mostrar el error si el archivo es demasiado grande */}
+    {/* MOSTRAR ERROR */}
     {error && <p className="error-message">{error}</p>}
 
+  {/** BOTON DE PUBLICAR RESPUESTA */}
     <button type="submit" className="btn-publicar">Publicar Mensaje</button>
   </form>
 </div>

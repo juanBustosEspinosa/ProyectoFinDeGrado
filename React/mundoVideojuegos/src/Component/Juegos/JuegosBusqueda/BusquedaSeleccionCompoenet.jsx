@@ -6,7 +6,10 @@ import '../ListaJuegos.css'
 function BusquedaSeleccionCompoenet() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const nombre = queryParams.get('nombre'); // Aquí obtienes el nombre del juego
+  const nombre = queryParams.get('nombre') || null; // Aquí obtienes el nombre del juego
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const empresa = location.state?.empresa || false; // por defecto false si no llega
+
   const [juegos, setJuegos] = useState([]);
   const navigate = useNavigate();
 
@@ -27,11 +30,17 @@ function BusquedaSeleccionCompoenet() {
   useEffect(() => {
     const obtenerJuegos = async () => {
       try {
-        const resposive = await axios.get('http://localhost:8091/Juego/BuscarJuegos', {
-          params: { nombre: nombre }
-        }); 
-        //const resposive = await axios.get("http://localhost:8091/Juego"); //Se deja comentado para la prueba de errores como puede ser la paginacion
 
+      let resposive;
+        if (!empresa){
+         resposive= await axios.get('http://localhost:8091/Juego/BuscarJuegos', {
+          params: { nombre: nombre }
+        }); //Hacemos una busqueda por nombre por ejemplo si pones una n te buscara todos los juego que contengas una n
+        }else if (empresa) {
+          resposive = await axios.get('http://localhost:8091/Juego/BuscarJuegosUsuario',
+            {params: {id: usuario.id}}
+          ) //Buscamos los juegos de un usuario 
+        }
         
         setJuegos(resposive.data);
       } catch (error) {
@@ -39,16 +48,30 @@ function BusquedaSeleccionCompoenet() {
       }
     };
 
-    if (nombre) {
+    
       obtenerJuegos();
-    }
+    
   }, [nombre]);
 
   // Manejar la selección de un juego
   const handleSeleccionarJuego = (juego) => {
     // Pasar el objeto completo del juego como estado al navegar
+    if (!empresa){
     navigate('/publicacion', { state: { juego: juego } });
+    } else if (empresa) {
+      navigate('/PublicarMensajeInformatico', { state: { juego: juego } });
+
+    }
   };
+
+  const handleVolver = () => {
+        if (!empresa){
+    navigate('/publicacion'); 
+    } else if (empresa) {
+      navigate('/PublicarMensajeInformatico');
+
+    }
+  }
 
   return (
       <div className="lista-juegos-container">
@@ -69,6 +92,8 @@ function BusquedaSeleccionCompoenet() {
         </div>
         ))}
       </div>
+
+          {/** PAGINACION */}
       <div className="paginacion">
         {Array.from({ length: totalPaginas }, (_, i) => (
           <button
@@ -79,6 +104,10 @@ function BusquedaSeleccionCompoenet() {
             {i + 1}
           </button>
         ))}
+
+
+        {/** BOTON */}
+        <button className='' onClick={handleVolver}>volver</button>
       </div>
     </div>
   );

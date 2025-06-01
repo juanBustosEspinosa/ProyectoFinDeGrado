@@ -2,33 +2,51 @@
 .form-container {
     max-width: 50%;  /* Haciendo el contenedor más ancho */
     margin: 0 auto;
-    padding: 40px;
+    padding-top: 10px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    padding-right: 40px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  .input-nombre, .input-descripcion, .input-imagen, .input-puntuacion {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .input-nombre {
-    font-size: 18px;
-  }
-  
-  textarea.input-descripcion {
-    height: 100px;
-  }
-  
-  .input-puntuacion {
-    width: 100%;
-  }
-  
+.input-nombre,
+.input-descripcion,
+.input-imagen,
+.input-puntuacion {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: #f9f9f9;
+  outline: none;
+}
+
+.input-nombre {
+  font-size: 18px;
+}
+
+textarea.input-descripcion {
+  height: 120px;
+  resize: vertical;
+}
+
+.input-puntuacion {
+  width: 100%;
+}
+
+.input-nombre:focus,
+.input-descripcion:focus,
+.input-imagen:focus,
+.input-puntuacion:focus {
+  border-color: #4a90e2;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
   .puntuacion-display {
     display: block;
     text-align: center;
@@ -38,7 +56,7 @@
   
   .btn-buscar, .btn-publicar {
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #3b82f6;
     color: white;
     border: none;
     border-radius: 4px;
@@ -49,7 +67,7 @@
   }
   
   .btn-buscar:hover, .btn-publicar:hover {
-    background-color: #45a049;
+  background-color: #2f68c3;
   }
   
   .error-message {
@@ -57,4 +75,43 @@
     font-size: 14px;
     margin-top: 5px;
   }
-  
+  .publicar-titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #007bff;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+/* RESPONSIVE */
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 992px) {
+  .form-container {
+    max-width: 75%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .publicar-titulo {
+    font-size: 2rem;
+  }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  .form-container {
+    max-width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .publicar-titulo {
+    font-size: 1.6rem;
+  }
+
+  .btn-buscar, .btn-publicar {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 18px;
+  }
+}

@@ -1,18 +1,24 @@
 package org.example.poryectofinal.MundoVideojuegos.Servicio;
 
 import org.example.poryectofinal.MundoVideojuegos.Excepciones.UsuarioNoEncontradoException;
+import org.example.poryectofinal.MundoVideojuegos.Modulo.Mensaje;
 import org.example.poryectofinal.MundoVideojuegos.Modulo.Usuario;
 import org.example.poryectofinal.MundoVideojuegos.Repositorio.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class ServicioUsuario {
     @Autowired
     private RepositorioUsuario repositorioUsuario;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public List<Usuario> getAll(){
@@ -25,6 +31,15 @@ public class ServicioUsuario {
         }
         return null;
     }
+    public List<Usuario> getUsuarioDelMes(){
+        LocalDate ahora = LocalDate.now();
+        int mesActual = ahora.getMonthValue();
+        int anioActual = ahora.getYear();
+
+        return repositorioUsuario.buscarUsuariosDelMes(mesActual, anioActual);
+    }
+
+
 
     @Transactional
     public Usuario inicioSesion(String nickname, String password) {
@@ -33,7 +48,11 @@ public class ServicioUsuario {
             throw new UsuarioNoEncontradoException("El usuario con nickname " + nickname + " no fue encontrado.");
         }
 
-        if (!usuario.getContrasena().equals(password)) {
+        if (usuario.getContrasena().equals(password)){ //Parte para las pruebas
+            return usuario;
+        }
+
+        if (!passwordEncoder.matches(password, usuario.getContrasena())) {
             throw new IllegalArgumentException("Contraseña incorrecta.");
         }
 
@@ -41,9 +60,19 @@ public class ServicioUsuario {
     }
     @Transactional
     public String save(Usuario usuario){
+
         if (repositorioUsuario.existsByNickname(usuario.getNickname())){
-            return "El nombre del usuario ya existe";
-        }else {
+            throw new IllegalArgumentException ("El nombre del usuario ya existe");
+        } else if (repositorioUsuario.existsByCorreo(usuario.getCorreo())) {
+            throw new IllegalArgumentException ("El correo ya existe");
+        } else if (repositorioUsuario.existsByTelefono(usuario.getTelefono())) {
+            throw new IllegalArgumentException ("El telefono ya existe");
+        }else if (usuario.getContrasena() == null ||
+                !usuario.getContrasena().matches("^(?=(?:.*[A-Za-z]){6,})(?=.*[A-Z]).*$")) {
+            throw new IllegalArgumentException("La contraseña debe tener al menos 6 letras y una mayúscula");
+        } else {
+            String passwordHash = passwordEncoder.encode(usuario.getContrasena());
+            usuario.setContrasena(passwordHash);
             repositorioUsuario.save(usuario);
             return "Se ha creado el usuario";
         }
@@ -57,6 +86,11 @@ public class ServicioUsuario {
         }
         return "El usuario no existe";
 
+    }
+
+    @Transactional
+    public List<Usuario> buscarPorNickname(String nickname){
+        return repositorioUsuario.buscarPorNickname(nickname);
     }
     @Transactional
     public String delete(Integer id){

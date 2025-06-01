@@ -1,0 +1,32 @@
+.contenedor-Footer {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  letter-spacing: 1px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-autor {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .contenedor-Footer {
+    font-size: 13px;
+    padding: 16px 10px;
+  }
+
+  .footer-autor {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}

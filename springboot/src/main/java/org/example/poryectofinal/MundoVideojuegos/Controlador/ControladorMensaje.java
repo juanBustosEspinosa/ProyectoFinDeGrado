@@ -22,10 +22,24 @@ public class ControladorMensaje {
     public ResponseEntity<List<Mensaje>> getAll(){
         return ResponseEntity.ok(servicioMensaje.getAll());
     }
+    @GetMapping("/MensajeMes")
+    public ResponseEntity<List<Mensaje>> getMensajeMes(){
+        return ResponseEntity.ok(servicioMensaje.getMensajesDelMes());
+    }
     @GetMapping("{id}")
     public ResponseEntity<Mensaje> getById(@PathVariable int id){
         return ResponseEntity.ok(servicioMensaje.getById(id));
     }
+
+    @GetMapping("/Juego")
+    public ResponseEntity<List<Mensaje>> getJuego(@RequestParam Integer id){
+        return ResponseEntity.ok(servicioMensaje.getAllByJuegoId(id));
+    }
+    @GetMapping("/Usuario")
+    public ResponseEntity<List<Mensaje>> getUsuario(@RequestParam Integer id){
+        return ResponseEntity.ok(servicioMensaje.getAllByUsuarioId(id));
+    }
+
 
     @PostMapping
     public ResponseEntity<String> add(@Valid @RequestBody Mensaje mensaje){
@@ -41,8 +55,8 @@ public class ControladorMensaje {
         return ResponseEntity.ok(servicioMensaje.updateImagen(id,file));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> delete(@PathVariable int id){
+    @DeleteMapping("/EliminarMensaje")
+    public ResponseEntity<String> delete(@RequestParam Integer id){
         return ResponseEntity.ok(servicioMensaje.delete(id));
     }
 

@@ -20,9 +20,18 @@ public class ControladorUsuario {
     public ResponseEntity<List<Usuario>> getAll(){
         return ResponseEntity.ok(servicioUsuario.getAll());
     }
+    @GetMapping("/UsuarioMes")
+    public ResponseEntity<List<Usuario>> getByMes(){
+        return ResponseEntity.ok(servicioUsuario.getUsuarioDelMes());
+    }
     @GetMapping("{id}")
     public ResponseEntity<Usuario> getById(@PathVariable int id){
         return ResponseEntity.ok(servicioUsuario.getById(id));
+    }
+
+    @GetMapping("/BuscaUsuario")
+    public ResponseEntity<List<Usuario>> getByNickname(@RequestParam String nickname){
+        return ResponseEntity.ok(servicioUsuario.buscarPorNickname(nickname));
     }
 
     @GetMapping("/login")
@@ -44,5 +53,6 @@ public class ControladorUsuario {
     public ResponseEntity<String> delete(@PathVariable int id){
         return ResponseEntity.ok(servicioUsuario.delete(id));
     }
+
 
 }

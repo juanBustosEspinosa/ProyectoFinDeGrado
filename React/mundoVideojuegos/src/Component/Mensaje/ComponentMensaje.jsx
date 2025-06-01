@@ -3,29 +3,45 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ListaMensajes from './ListaMensajes';
 
-function ComponentMensaje(){
+function ComponentMensaje({idjuego,idUsuario,mes}){
     const [mensajes,setMensajes] = useState([]);
     
     useEffect(() =>{
         const obtenerMensajes = async (e) => {
+          console.log("Estoy en Component Mensaje el juego es " +idjuego);
 
             
             try {
+              let response;
+              let ramdom = false;
                 //Vamos a hacer una peticion a las Base de datos para sacar los mensajes
-                const response = await axios.get("http://localhost:8091/Mensaje");
+                if (idjuego === null && idUsuario === null && !mes){
+                  response = await axios.get("http://localhost:8091/Mensaje"); //COGERMOS TODOS LOS MENSAJES
+                  ramdom = true;
+
+                } else if(idjuego != null){
+                  response = await axios.get("http://localhost:8091/Mensaje/Juego",
+                    {params: {id: idjuego}}
+                  ); //COGEMOS TODOS LOS MENSAJES DE UN JUEGO
+                } else if (mes){
+                  response = await axios.get("http://localhost:8091/Mensaje/MensajeMes");//COGEMOS TODOS LOSMMENSAJES DEL MES
+                  ramdom = true;
+
+                }else {
+                    response = await axios.get("http://localhost:8091/Mensaje/Usuario",
+                    {params: {id: idUsuario}}
+                  ); //COGEMOS TODOS LOS MENSAJES DE UN USUARIO
+                }
                 const mensajeData = response.data;
-                setMensajes(mensajeData);
+                //HACEMOS QUE LOS MENSAJES SEAN ALEATORIOS PARA QUE NO SE HAGAN REPETITIVOS
+                if (ramdom){
+                  const mezclados = [...mensajeData].sort(() => Math.random() - 0.5);
+                  setMensajes(mezclados)
+                }else{
+                  setMensajes(mensajeData);
+                }
                 console.log("Mensajes recibidos:", mensajeData);
 
-                //Mediante un map vamos haciendo peticiones para saber los usuarios del mensaje
-                /**const peticionUsuarios = mensajeData.map((mensaje)=>
-                  axios.get(`http://localhost:8091/Usuario/${mensaje.id_usuario}`)
-                );
-    
-                //Esperamos a que nos devuelva todo porque sino puede dar error
-                const respuestasUsuarios = await Promise.all(peticionUsuarios);
-                
-                setUsuarios(respuestasUsuarios);*/
 
             } catch(error) {
                 console.error("Error al obtener los mensajes:", error);
@@ -38,10 +54,11 @@ function ComponentMensaje(){
 
     return (
         <div>
+            {/** SI NO HAY MENSAJES SE MOSTRARA NO HAY MENSAJES EN CASO CONTRARIO SE MOSTRARAN LOS MENSAJES */}
         {mensajes.length === 0 ? (
           <p>No hay mensajes para mostrar</p>
         ) : (
-          <ListaMensajes mensajes={mensajes}/>
+          <ListaMensajes mensajes={mensajes} setMensajes={setMensajes}/>
         )}
       </div>
     )

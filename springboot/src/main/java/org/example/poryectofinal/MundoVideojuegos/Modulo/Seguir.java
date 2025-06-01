@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "seguir")
@@ -18,18 +19,23 @@ public class Seguir {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_usuario1", nullable = false)
-    private Usuario idUsuario1;
+    @JoinColumn(name = "id_seguidor", nullable = false)
+    private Usuario idSeguidor;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_usuario2", nullable = false)
-    private Usuario idUsuario2;
+    @JoinColumn(name = "id_seguido", nullable = false)
+    private Usuario idSeguido;
 
-    @NotNull
     @Column(name = "fecha_seguir", nullable = false)
-    private Instant fechaSeguir;
+    private LocalDateTime fechaSeguir;
+    @PrePersist
+    public void prePersist() {
+        if (this.fechaSeguir == null) {
+            this.fechaSeguir = LocalDateTime.now();  // Asigna la fecha y hora actuales
+        }
+    }
 
     public Integer getId() {
         return id;
@@ -39,27 +45,27 @@ public class Seguir {
         this.id = id;
     }
 
-    public Usuario getIdUsuario1() {
-        return idUsuario1;
+    public Usuario getIdSeguidor() {
+        return idSeguidor;
     }
 
-    public void setIdUsuario1(Usuario idUsuario1) {
-        this.idUsuario1 = idUsuario1;
+    public void setIdSeguidor(Usuario idSeguidor) {
+        this.idSeguidor = idSeguidor;
     }
 
-    public Usuario getIdUsuario2() {
-        return idUsuario2;
+    public Usuario getIdSeguido() {
+        return idSeguido;
     }
 
-    public void setIdUsuario2(Usuario idUsuario2) {
-        this.idUsuario2 = idUsuario2;
+    public void setIdSeguido(Usuario idSeguido) {
+        this.idSeguido = idSeguido;
     }
 
-    public Instant getFechaSeguir() {
+    public LocalDateTime getFechaSeguir() {
         return fechaSeguir;
     }
 
-    public void setFechaSeguir(Instant fechaSeguir) {
+    public void setFechaSeguir(LocalDateTime fechaSeguir) {
         this.fechaSeguir = fechaSeguir;
     }
 

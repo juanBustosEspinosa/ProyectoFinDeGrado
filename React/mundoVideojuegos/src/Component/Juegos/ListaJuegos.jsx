@@ -4,8 +4,9 @@ import './ListaJuegos.css';
 
 function ListaJuegos({ juegos }) {
   const navigate = useNavigate();
+  
   const [paginaActual, setPaginaActual] = useState(1);
-  const juegosPorPagina = 10;
+  const juegosPorPagina = 12;
 
   const totalPaginas = Math.ceil(juegos.length / juegosPorPagina);
 
@@ -25,12 +26,15 @@ function ListaJuegos({ juegos }) {
               <p><strong>Género 1:</strong> {juego.genero1}</p>
               {juego.genero2 && <p><strong>Género 2:</strong> {juego.genero2}</p>}
               <p><strong>Tipo:</strong> {juego.tipo}</p>
-              <button onClick={() => navigate(`/juegos/${juego.id}`)}>Ver más detalles</button>
+              <button onClick={() => navigate('/DetalleJuego', { state: { juego } })}>
+              Ver más detalles
+              </button>
             </div>
           </div>
         ))}
       </div>
 
+          {/** PAGINACION */}
       <div className="paginacion">
         {Array.from({ length: totalPaginas }, (_, i) => (
           <button

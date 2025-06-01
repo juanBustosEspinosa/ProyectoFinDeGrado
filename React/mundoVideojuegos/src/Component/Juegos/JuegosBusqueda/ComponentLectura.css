@@ -1,0 +1,59 @@
+.busqueda-container {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+  width: 95%;
+  justify-content: center;
+  padding: 0 1rem; /* Espacio horizontal */
+}
+
+.input-Busqueda {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  flex: 1;
+  min-width: 250px;
+  transition: border-color 0.3s ease, width 0.3s ease;
+}
+
+.input-Busqueda:focus {
+  border-color: #4a90e2;
+}
+
+.btn-envioBusquedaJuego {
+  padding: 0.6rem 1.2rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.btn-envioBusquedaJuego:hover {
+  background-color: #357ab7;
+}
+
+/* 🎯 RESPONSIVIDAD MEJORADA */
+@media (max-width: 600px) {
+  .busqueda-container {
+    flex-direction: column;
+    align-items: center; /* Centra el contenido */
+    padding: 0 1rem;
+  }
+
+  .input-Busqueda,
+  .btn-envioBusquedaJuego {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .input-Busqueda {
+    margin-bottom: 0.75rem; /* Separación del botón */
+  }
+}

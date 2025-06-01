@@ -13,6 +13,7 @@ function ButtonPublicar(){
 
     return (
         <div className="contenedor-boton">
+                  {/** BOTON DE LA PUBLICACION */}
             <button className="boton-publicar" onClick={pressButton}>Publicar +</button>
         </div>
     )

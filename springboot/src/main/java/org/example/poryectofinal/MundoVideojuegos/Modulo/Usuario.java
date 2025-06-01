@@ -1,8 +1,7 @@
 package org.example.poryectofinal.MundoVideojuegos.Modulo;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -18,6 +17,8 @@ public class Usuario {
     private Integer id;
 
     @NotNull
+    @Min(value = 100000000, message = "El teléfono debe tener 9 dígitos")
+    @Max(value = 999999999, message = "El teléfono debe tener 9 dígitos")
     @Column(name = "telefono", nullable = false)
     private Integer telefono;
 
@@ -43,7 +44,7 @@ public class Usuario {
     @PrePersist
     public void prePersist() {
         if (this.fechaInicio == null) {
-            this.fechaInicio = LocalDateTime.now();  // Asigna la fecha y hora actuales
+            this.fechaInicio = LocalDateTime.now();
         }
     }
 
@@ -62,6 +63,9 @@ public class Usuario {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
+    @Column(name = "imagen")
+    private byte[] imagen;
+
 //    @OneToOne(mappedBy = "idUsuario")
 //    private Disenousuario disenousuario;
 //
@@ -79,6 +83,14 @@ public class Usuario {
 //
 //    @OneToMany(mappedBy = "idUsuario1")
 //    private Set<Seguir> seguirs = new LinkedHashSet<>();
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 
     public Integer getId() {
         return id;

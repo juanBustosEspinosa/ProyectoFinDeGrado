@@ -25,6 +25,11 @@ public class ControladorLikesDislikes {
     public ResponseEntity<LikesDislike> getById(@PathVariable int id){
         return ResponseEntity.ok(servicioLikesDislike.getById(id));
     }
+    @GetMapping("/Respuestas")
+    public ResponseEntity<List<LikesDislike>> getALLByRespuesta(@RequestParam Integer idMensajeRespuesta){
+        return ResponseEntity.ok(servicioLikesDislike.getLikesDisLikesUsuario(idMensajeRespuesta));
+    }
+
     @GetMapping("/Usuario")
     public ResponseEntity<List<LikesDislike>> getByUsuario(@RequestParam("idUsuario") Integer usuario){
         return ResponseEntity.ok(servicioLikesDislike.getLikesDisLikesUsuario(usuario));
@@ -53,5 +58,18 @@ public class ControladorLikesDislikes {
     public ResponseEntity<String> deleteMensajeRespuesta(@RequestParam int id_Usuario, @RequestParam int id_MensajeRespuesta) {
         return ResponseEntity.ok(servicioLikesDislike.deleteMensajeRespuesta(id_Usuario,id_MensajeRespuesta));
     }
+
+    @DeleteMapping("/eliminarMensajeALL")
+    public ResponseEntity<String> deleteMensaje(@RequestParam int idMensaje) {
+        return ResponseEntity.ok(servicioLikesDislike.deleteALLMensajes(idMensaje));
+    }
+
+    @DeleteMapping("/eliminarRespuestaALL")
+    public ResponseEntity<String> deleteALLMensajeRespuesta(@RequestParam int idMensajeRespuesta) {
+        return ResponseEntity.ok(servicioLikesDislike.deleteALLRespuestas(idMensajeRespuesta));
+    }
+
+
+
 }
 

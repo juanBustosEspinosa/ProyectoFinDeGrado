@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -18,11 +19,11 @@ public class ServicioSeguir {
         return repositorioSeguir.findAll();
     }
     @Transactional
-    public Seguir getById(Integer id){
-        if (repositorioSeguir.existsById(id)) {
-            return repositorioSeguir.getSeguirById(id);
+    public List<Seguir> getById(Integer id){
+        if (repositorioSeguir.existsByIdSeguidor_Id((id))) {
+            return repositorioSeguir.findByIdSeguidor_Id(id);
         }
-        return null;
+        return Collections.emptyList();
     }
     @Transactional
     public String save(Seguir seguir){
@@ -46,6 +47,23 @@ public class ServicioSeguir {
     @Transactional
     public String delete(Integer id){
         repositorioSeguir.deleteById(id);
+        return "Se ha eliminado el Mensaje";
+    }
+
+
+    public Integer countSeguidor(Integer id){
+        return repositorioSeguir.countByIdSeguidor_Id(id);
+    }
+
+    public Integer countSeguido(Integer id){
+        return repositorioSeguir.countByIdSeguido_Id(id);
+    }
+
+
+    @Transactional
+    public String deleteSeguir(Seguir seguir) {
+        Seguir s = repositorioSeguir.findByIds(seguir.getIdSeguidor().getId(),seguir.getIdSeguido().getId());
+        repositorioSeguir.delete(s);
         return "Se ha eliminado el Mensaje";
     }
 }

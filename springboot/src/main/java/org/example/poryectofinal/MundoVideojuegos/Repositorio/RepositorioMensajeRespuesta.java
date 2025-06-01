@@ -13,4 +13,7 @@ public interface RepositorioMensajeRespuesta  extends JpaRepository<MensajeRespu
 
 
     List<MensajeRespuesta> findByIdMensaje_Id(Integer idMensaje);
+
+    void deleteByIdMensaje_Id(Integer idMensajeId);
+
 }

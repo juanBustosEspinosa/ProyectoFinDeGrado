@@ -30,9 +30,11 @@ public class Juego {
     private String nombre;
 
     @Lob
+    @NotNull
     @Column(name = "descripcion")
     private String descripcion;
 
+    @NotNull
     @Column(name = "fecha_lanzamiento")
     private LocalDate fechaLanzamiento;
 
@@ -45,8 +47,8 @@ public class Juego {
     @Column(name = "genero2", length = 100)
     private String genero2;
 
-    @NotNull
     @Lob
+    @NotNull
     @Column(name = "tipo", nullable = false)
     private String tipo;
 

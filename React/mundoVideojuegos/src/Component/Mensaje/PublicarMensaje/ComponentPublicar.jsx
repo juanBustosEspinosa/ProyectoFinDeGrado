@@ -24,32 +24,34 @@ function ComponentPublicar() {
     }
   }, [juego]);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
 
-    if (file) {
-      if (file.size > MAX_SIZE_BYTES) {
-        setError(`El archivo es demasiado grande. El tamaño máximo permitido es ${MAX_SIZE_MB} MB.`);
-        setImagen(null);  // Limpiar el archivo si es muy grande
-      } else {
-        setError(null);  // Limpiar el error si el archivo es válido
-        setImagen(file);  // Guardar el archivo en el estado si es válido
-      }
-    }
+  reader.onloadend = () => {
+    const base64String = reader.result.split(',')[1]; // solo base64
+    setImagen(base64String); // esto es lo que espera el backend
   };
+
+  if (file) {
+    reader.readAsDataURL(file); // importante usar .readAsDataURL
+  }
+};
 
   const handlePublicar = async (e) => {
     e.preventDefault();
+    //SE OBLIGA A SELECCIONAR UN JUEGO PARA HACER UN PUBLICACION
     if (!juego) {
       alert("Selecciona un juego antes de publicar");
       return;
     }
 
+    //HAY QUE PONER UNA PUNTUACION
     if (!puntuacion) {
       alert("No hay puntuacion");
       return;
     }
-
+    //EN CASO DE QUE EL USUARIO NO QUIERA UNA DESCRIPCION SOLO PUNTUAR EL JUEGO PONDRA NO HAY MENSAJE
     if (!descripcion || descripcion.trim() === ''){
       setDescripcion("No hay mensaje");
     }
@@ -69,7 +71,7 @@ function ComponentPublicar() {
 
 
     try {
-      const response = await axios.post("http://localhost:8091/Mensaje", mensajeData);
+      const response = await axios.post("http://localhost:8091/Mensaje", mensajeData); //Hacemos el Post a la API
       console.log('Respuesta de la API:', response.data);
 
       // Aquí puedes manejar la respuesta, por ejemplo:
@@ -87,12 +89,16 @@ function ComponentPublicar() {
     }
   };
 
+  //Aqui se envia al usuario para poder elegir el juego
   const handleClick = () => {
     navigate(`/EleccionJuego?nombre=${nombre}`);
   };
 
   return (
 <div className="form-container">
+  <h1 className='publicar-titulo'>Publicar Mensaje</h1>
+       
+        {/** NOMBRE DEL JUEGO */}
   <input
     type="text"
     className="input-nombre"
@@ -100,8 +106,10 @@ function ComponentPublicar() {
     onChange={(e) => setNombre(e.target.value)}
     placeholder="Escribe el nombre del juego"
   />
+        {/** BOTON PARA PODER SELECIONAR EL JUEGO */}
   <button type="button" className="btn-buscar" onClick={handleClick}>Buscar Juego</button>
 
+      {/** PUNTUACION */}
   <form onSubmit={handlePublicar} className="form-publicar">
     <input
       type="range"
@@ -114,6 +122,7 @@ function ComponentPublicar() {
     />
     <span className="puntuacion-display">{puntuacion}</span>
 
+      {/** DESCRIPCION */}
     <textarea
       className="input-descripcion"
       value={descripcion}
@@ -121,6 +130,7 @@ function ComponentPublicar() {
       placeholder="Descripción"
     ></textarea>
 
+      {/** IMAGEN */}
     <input
       type="file"
       accept="image/*"
@@ -128,9 +138,10 @@ function ComponentPublicar() {
       onChange={handleFileChange}
     />
 
-    {/* Mostrar el error si el archivo es demasiado grande */}
+    {/* MOSTRAR ERROR */}
     {error && <p className="error-message">{error}</p>}
-
+    
+    {/** BOTON DE PUBLICAR */}
     <button type="submit" className="btn-publicar">Publicar Mensaje</button>
   </form>
 </div>
